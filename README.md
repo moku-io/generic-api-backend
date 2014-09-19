@@ -1,23 +1,23 @@
-# Generic Rails API backend
+# Rails API backend preconfigured
 
 > To goal of this project is to have a production-ready deploy of an Rails 4 API backend in a few minutes.
 
-It is preconfigured with:
-- authentication ([Devise] + [CanCan]);
-- easy preconfigured deployment ([Capistrano] + [nginx] + [puma]);
-- easy API testing and documentation ([RSpec API documentation] + [Raddocs]);
+It is a blank Rails app, preconfigured with:
+- authentication via token ([Devise] + [CanCan]);
+- full deploy setup ([Capistrano] + [nginx] + [puma]);
+- gems for API testing and documentation ([RSpec API documentation] + [Raddocs]);
 - basic administration backend ([ActiveAdmin]);
-- CORS preconfigured ([rack-cors]);
+- CORS and URL regex ([rack-cors]);
 - API versioning via headers.
 
 
 Deployment stack is the following:
-- Rails 4.1
+- Rails 4.1;
 - Capistrano 3;
 - nginx configured via Capistrano task;
 - Puma configured via Capistrano task;
-- crontab with [whenever]
-- environment variables with [Figaro];
+- crontab with [whenever];
+- environment variables with [figaro];
 - both production and staging environments configured for Capistrano/nginx/puma;
 - configurable exception notification via email ([exception_notification]).
 
