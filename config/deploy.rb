@@ -1,0 +1,84 @@
+# config valid only for Capistrano 3.1
+lock '3.2.1'
+
+set :application,   "xxx_#{fetch(:stage)}"
+set :repo_url, 'git@bitbucket.org:xxx/xxx.git'
+
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "develop"
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+
+# Don't change these unless you know what you're doing
+set :user, 'deploy'
+set :pty, true
+set :use_sudo,        false
+set :deploy_via,      :remote_cache
+set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
+set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log,  "#{release_path}/log/puma.access.log"
+set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
+set :puma_preload_app, true         # Lower memory footprint. For 0 seconds deploy set it to false and invoke puma:phased-restart on deploy:restart
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true  # Change to true if using ActiveRecord
+set :nginx_root_path, '/etc/nginx'
+set :nginx_sites_available, 'sites-available'
+set :nginx_sites_enabled, 'sites-enabled'
+set :nginx_template, "#{stage_config_path}/nginx.conf.erb"
+set :app_server, true
+set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
+
+## Defaults:
+# set :scm,           :git
+# set :branch,        :master
+# set :format,        :pretty
+# set :log_level,     :debug
+# set :keep_releases, 5
+
+## Linked Files & Directories (Default None):
+set :linked_files, %w{config/application.yml}
+# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+namespace :puma do
+  desc 'Create Directories for Puma Pids and Socket'
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
+      execute "mkdir #{shared_path}/tmp/log -p"
+    end
+  end
+
+  before :start, :make_dirs
+end
+
+namespace :deploy do
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      before 'deploy:restart', 'puma:start'
+      invoke 'deploy'
+      invoke 'nginx:site:add'
+      invoke 'nginx:site:enable'
+      invoke 'puma:monit:config'
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
+    end
+  end
+
+  # before :starting,     :check_revision
+  after  :finishing,    :compile_assets
+  after  :finishing,    :cleanup
+  after  :finishing,    :restart
+end
