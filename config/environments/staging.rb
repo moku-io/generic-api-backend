@@ -81,7 +81,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  config.action_mailer.default_url_options = { :host => 'new.my-new-app.moku.io' }
+  config.action_mailer.default_url_options = { :host => 'staging.my-new-app.moku.io' }
 
   config.action_mailer.smtp_settings = { :address              => 'smtp.mandrillapp.com',
                                          :port                 => 587,
