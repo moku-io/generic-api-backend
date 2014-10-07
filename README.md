@@ -3,7 +3,7 @@
 > To goal of this project is to have a production-ready deploy of an Rails 4 API backend in a few minutes.
 
 It is a blank Rails app, preconfigured with:
-- authentication via token ([Devise] + [CanCan]);
+- basic authentication via token ([Devise] + [CanCan]);
 - full deploy setup ([Capistrano] + [nginx] + [puma]);
 - gems for API testing and documentation ([RSpec API documentation] + [Raddocs]);
 - basic administration backend ([ActiveAdmin]);
