@@ -4,7 +4,7 @@ lock '3.2.1'
 set :application,   "xxx_#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxx/xxx.git'
 
-# Default branch is :master
+# Default branch is 'develop'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "develop"
 
@@ -44,6 +44,8 @@ set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/application.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs,  %w{log tmp/worker_pids tmp/cache public/assets public/system}
+
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -52,6 +54,7 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/sockets -p"
       execute "mkdir #{shared_path}/tmp/pids -p"
       execute "mkdir #{shared_path}/tmp/log -p"
+      execute "mkdir #{shared_path}/public/system -p"
     end
   end
 

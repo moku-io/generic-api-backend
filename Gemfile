@@ -53,7 +53,7 @@ group :development do
   gem 'capistrano3-puma',   require: false
 end
 
-#gem 'whenever'
+gem 'whenever'
 
 gem 'figaro', :github => 'laserlemon/figaro'
 

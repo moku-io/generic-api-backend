@@ -83,11 +83,11 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'new.my-new-app.moku.io' }
 
-  config.action_mailer.smtp_settings = { :address              => 'smtp.mandrillapp.com',
+  config.action_mailer.smtp_settings = { :address              => ENV['smtp_address'],
                                          :port                 => 587,
-                                         :domain               => 'moku.io',
-                                         :user_name            => '',
-                                         :password             => '',
+                                         :domain               => ENV['smtp_domain'],
+                                         :user_name            => ENV['smtp_username'],
+                                         :password             => ENV['smtp_password'],
                                          :authentication       => 'plain',
                                          :enable_starttls_auto => true }
 
