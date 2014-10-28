@@ -26,6 +26,7 @@ server {
   ssl on;
   ssl_certificate <%= fetch(:nginx_ssl_certificate_path) %>/<%= fetch(:nginx_ssl_certificate) %>;
   ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;  # don’t use SSLv3 ref: POODLE
 <% else %>
   listen 80; # deferred;
 <% end %>
