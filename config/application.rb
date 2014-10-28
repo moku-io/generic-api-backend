@@ -22,7 +22,7 @@ module GenericBackend
 
     config.i18n.available_locales = [:it, :en]
 
-    config.middleware.use Rack::Cors do
+    config.middleware.insert_before Warden::Manager, Rack::Cors do
       allow do
         origins /http:\/\/localhost(:\d+)?/,
                 /http:\/\/127\.0\.0\.1(:\d+)?/,
