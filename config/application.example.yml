@@ -1,0 +1,29 @@
+# Add configuration values here, as shown below.
+
+aws_access_key_id: xxxx
+aws_secret_access_key: xxxx
+
+smtp_address: 'smtp.gmail.com'
+smtp_port: '587'
+smtp_domain: 'xxxx'
+smtp_username: 'xxxx@gmail.com'
+smtp_password: 'xxxx'
+smtp_authentication: 'plain'
+smtp_starttls: 'true'
+
+development:
+  s3_bucket: "xxxx-development"
+
+test:
+  s3_bucket: "xxxx-development"
+
+staging:
+  s3_bucket: "xxxx-staging"
+
+production:
+  secret_key_base: 1a26fee9e7c1c50624e29510e89dbe68f01d71f248ee44660ba11f0f97100a450e971a1b092fe84e85135b2074684753d2cf461a8e8ee506cd80f2bc8865d987
+  db_host: localhost
+  db_username: postgres
+  db_password: xxxxxxxxxxx
+  db_name: xxxxx-production
+  s3_bucket: "xxxx-production"

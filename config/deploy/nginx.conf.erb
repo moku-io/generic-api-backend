@@ -22,7 +22,7 @@ server {
 server {
 
 <% if fetch(:nginx_use_ssl) %>
-  listen 443; # deferred;
+  listen 443 ssl spdy; # deferred;
   ssl on;
   ssl_certificate <%= fetch(:nginx_ssl_certificate_path) %>/<%= fetch(:nginx_ssl_certificate) %>;
   ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>;

@@ -84,12 +84,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'staging.my-new-app.moku.io' }
 
   config.action_mailer.smtp_settings = { :address              => ENV['smtp_address'],
-                                         :port                 => 587,
+                                         :port                 => ENV['smtp_port'],
                                          :domain               => ENV['smtp_domain'],
                                          :user_name            => ENV['smtp_username'],
                                          :password             => ENV['smtp_password'],
-                                         :authentication       => 'plain',
-                                         :enable_starttls_auto => true }
+                                         :authentication       => ENV['smtp_authentication'],
+                                         :enable_starttls_auto => ENV['smtp_starttls'] == 'true' }
+
+  ActionMailer::Base.default :from => ENV['smtp_username']
 
   config.middleware.use ExceptionNotification::Rack,
                         :email => {

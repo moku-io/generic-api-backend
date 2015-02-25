@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.2.1'
+lock '3.3.5'
 
 set :application,   "xxx_#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxx/xxx.git'
@@ -44,8 +44,7 @@ set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/application.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_dirs,  %w{log tmp/worker_pids tmp/cache public/assets public/system}
-
+set :linked_dirs,  %w{log tmp/cache public/assets public/system}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -55,6 +54,7 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/pids -p"
       execute "mkdir #{shared_path}/tmp/log -p"
       execute "mkdir #{shared_path}/public/system -p"
+      execute "mkdir #{shared_path}/db_backups -p"
     end
   end
 

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 gem 'pg'
 
 # Use SCSS for stylesheets
@@ -13,6 +13,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
+
+gem 'activesupport-json_encoder'
 
 # Use jquery as the JavaScript library
 #gem 'jquery-rails'
@@ -45,12 +47,12 @@ gem 'puma', group: [:production, :staging]
 
 # Use Capistrano for deployment
 group :development do
-  gem 'capistrano',         require: false
-  gem 'capistrano-rvm',     require: false
-  gem 'capistrano-rails',   require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano3-nginx',  require: false
-  gem 'capistrano3-puma',   require: false
+  gem 'capistrano',                 require: false
+  gem 'capistrano-rvm',             require: false
+  gem 'capistrano-rails',           require: false
+  gem 'capistrano-bundler',         require: false
+  gem 'capistrano3-nginx', '2.0.2', require: false
+  gem 'capistrano3-puma',           require: false
 end
 
 gem 'whenever'
@@ -67,3 +69,6 @@ gem 'cancan'
 gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'exception_notification', group: [:production, :staging]
+
+
+# gem 'doorkeeper'
