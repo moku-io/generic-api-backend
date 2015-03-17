@@ -17,6 +17,7 @@ Deployment stack is the following:
 - nginx configured via Capistrano task;
 - Puma configured via Capistrano task;
 - crontab with [whenever];
+- auto backups for PostgreSQL;
 - environment variables with [figaro];
 - both production and staging environments configured for Capistrano/nginx/puma;
 - configurable exception notification via email ([exception_notification]).
@@ -26,7 +27,15 @@ See wiki article on how setup the server accordinly (TODO).
 
 
 ## Getting started
-TODO
+- rename project name module
+- nome git
+- nome database
+- update application.yml da application.example.yml
+- nome app su deploy
+- indirizzo server
+
+
+rake db:migrate
 
 
 ## Contributing
@@ -51,3 +60,46 @@ TODO
 [exception_notification]:https://github.com/smartinez87/exception_notification
 [whenever]:https://github.com/javan/whenever
 [Figaro]:https://github.com/laserlemon/figaro
+
+
+
+
+
+ TMP
+
+Deploy ultima versione del branch develop in ambiente staging
+cap staging deploy
+
+Deploy revision a56ffeaed78a80a6d3afebfeaee1c1e4da3775b9 in ambiente staging
+REVISION=f37d74ab7ec1fba90e21444299000128e7783a86 cap staging deploy
+
+È possibile anche pubblicare feature branch a patto non siano branch locali (git-flow publish)
+REVISION=feature/ZAT-557-capistrano-setup cap staging deploy
+
+Deploy ultima versione del branch master in ambiente produzione:
+REVISION=master cap production deploy
+
+N.B.Per produzione meglio fare una release con git flow
+
+
+Comandi extra
+Restart
+cap <env> deploy:restart
+
+Restart nginx
+cap <env> nginx:restart
+cap <env> nginx:reload
+
+Lista task Capistrano
+cap -vT
+
+
+Logs:
+cd ~/apps/hfarm_user_admin_production/current/log/
+
+Console:
+cd ~/apps/hfarm_user_admin_production/current
+RAILS_ENV=production bundle exec rails c
+
+
+MONIT nginx

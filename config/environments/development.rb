@@ -36,4 +36,16 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.action_mailer.smtp_settings = { :address              => ENV['smtp_address'],
+                                         :port                 => ENV['smtp_port'],
+                                         :domain               => ENV['smtp_domain'],
+                                         :user_name            => ENV['smtp_username'],
+                                         :password             => ENV['smtp_password'],
+                                         :authentication       => ENV['smtp_authentication'],
+                                         :enable_starttls_auto => ENV['smtp_starttls'] == 'true' }
+
+  ActionMailer::Base.default :from => ENV['smtp_username']
+
+  # config.action_mailer.perform_deliveries = true   ### Uncomment to send email in development.
 end

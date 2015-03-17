@@ -24,6 +24,7 @@ staging:
 
 production:
   <<: *default
+  pool: 16
   host: <%= ENV['db_host'] %>
   username: <%= ENV['db_username'] %>
   password: <%= ENV['db_password'] %>

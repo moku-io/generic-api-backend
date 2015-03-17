@@ -35,5 +35,14 @@ module GenericBackend
                  :max_age => 600
       end
     end
+
+    config.paperclip_defaults = {
+        :storage => :s3,
+        :s3_credentials => {
+            :bucket => ENV['s3_bucket'],
+            :access_key_id => ENV['aws_access_key_id'],
+            :secret_access_key => ENV['aws_secret_access_key']
+        }
+    }
   end
 end

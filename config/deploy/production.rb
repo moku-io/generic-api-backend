@@ -28,10 +28,11 @@ set :nginx_ssl_certificate_key, 'xxx_com.key'
 set :nginx_ssl_certificate_key_path, "#{shared_path}/ssl"
 
 # Puma settings
-set :puma_threads, [4, 16]
+set :puma_threads, [0, 16]
 set :puma_workers, 0
 
 # Disable multithreading  # http://omegadelta.net/2013/06/16/puma-on-heroku-with-mri/
+# Remember to enable preload_app! to speed things up. But check glitches with hot-restart.
 # set :puma_threads, [1, 1]
 # set :puma_workers, 5
 

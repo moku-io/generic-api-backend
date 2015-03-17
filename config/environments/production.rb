@@ -99,13 +99,4 @@ Rails.application.configure do
                             :sender_address => %{"Nuovo progetto" <support@moku.io>},
                             :exception_recipients => %w{michele@moku.io}
                         }
-
-#   config.paperclip_defaults = {
-#       :storage => :s3,
-#       :s3_credentials => {
-#           :bucket => Rails.application.secrets.s3_bucket,
-#           :access_key_id => Rails.application.secrets.aws_access_key_id,
-#           :secret_access_key => Rails.application.secrets.aws_secret_access_key
-#       }
-#   }
 end

@@ -25,5 +25,5 @@ production:
   db_host: localhost
   db_username: postgres
   db_password: xxxxxxxxxxx
-  db_name: xxxxx-production
+  db_name: xxxx-production
   s3_bucket: "xxxx-production"

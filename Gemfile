@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.0'
 gem 'pg'
 
 # Use SCSS for stylesheets
@@ -55,9 +55,13 @@ group :development do
   gem 'capistrano3-puma',           require: false
 end
 
+gem 'annotate'
+
 gem 'whenever'
 
-gem 'figaro', :github => 'laserlemon/figaro'
+gem 'figaro'
+
+gem 'paperclip'
 
 # CORS
 gem 'rack-cors'

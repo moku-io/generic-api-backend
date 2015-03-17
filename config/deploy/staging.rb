@@ -21,7 +21,7 @@ server 'staging.my-new-app.moku.io', user: 'deploy', roles: %w{web app db}, my_p
 set :nginx_domains, 'staging.my-new-app.moku.io'
 
 # Puma settings
-set :puma_threads, [4, 16]
+set :puma_threads, [0, 16]
 set :puma_workers, 0
 
 # Disable multithreading  # http://omegadelta.net/2013/06/16/puma-on-heroku-with-mri/
