@@ -38,7 +38,7 @@ group :development, :test do
 end
 
 # Docs
-gem 'raddocs'
+gem 'raddocs', github: 'smartlogic/raddocs'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -68,11 +68,9 @@ gem 'rack-cors'
 
 # Authentication and Authorization
 gem 'devise'
+gem 'devise_token_auth'
 gem 'cancan'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
 
-gem 'exception_notification', group: [:production, :staging]
-
-
-# gem 'doorkeeper'
+gem 'airbrake'

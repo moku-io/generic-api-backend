@@ -31,18 +31,9 @@ module GenericBackend
         resource '*',
                  :methods => [:get, :post, :put, :patch, :delete, :options],
                  :headers => :any, #['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Accept-Encoding', 'Authorization', 'Content-Disposition', 'Client-Version', 'Accept-Language'], # ALL headers must be specified
-                 # :expose  => ['Some-Custom-Response-Header'],
+                 :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
                  :max_age => 600
       end
     end
-
-    config.paperclip_defaults = {
-        :storage => :s3,
-        :s3_credentials => {
-            :bucket => ENV['s3_bucket'],
-            :access_key_id => ENV['aws_access_key_id'],
-            :secret_access_key => ENV['aws_secret_access_key']
-        }
-    }
   end
 end

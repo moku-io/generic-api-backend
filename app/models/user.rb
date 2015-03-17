@@ -1,13 +1,46 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  provider               :string           not null
+#  uid                    :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default("0"), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  name                   :string
+#  nickname               :string
+#  image                  :string
+#  email                  :string
+#  tokens                 :text
+#  created_at             :datetime
+#  updated_at             :datetime
+#
+# Indexes
+#
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_users_on_email                 (email)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_uid_and_provider      (uid,provider) UNIQUE
+#
+
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :registerable, and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable
+  # Include default devise modules. Now disabled: :omniauthable
+  devise :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :trackable, :validatable,
+          :confirmable
+  include DeviseTokenAuth::Concerns::User
 
-  before_save :ensure_authentication_token!
-
-  def generate_secure_token_string
-    SecureRandom.urlsafe_base64(25).tr('lIO0', 'sxyz')
-  end
 
   # Sarbanes-Oxley Compliance: http://en.wikipedia.org/wiki/Sarbanes%E2%80%93Oxley_Act
   def password_complexity
@@ -16,39 +49,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def password_presence
-    password.present? && password_confirmation.present?
-  end
-
-  def password_match
-    password == password_confirmation
-  end
-
-  def ensure_authentication_token!
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
-  end
-
-  def generate_authentication_token
-    loop do
-      token = generate_secure_token_string
-      break token unless User.where(authentication_token: token).first
-    end
-  end
-
-  def reset_authentication_token!
-    self.authentication_token = generate_authentication_token
-    save!(validate: false)
-  end
-
-
-  def as_json(options = {})
-    super(options.merge(
-              # :methods => [...],
-              # :only => [...],
-              # :include => [...],
-              :except => [:created_at, :updated_at]
-          ))
-  end
+  # def as_json(options = {})
+  #   super(options.merge(
+  #             # :methods => [...],
+  #             # :only => [...],
+  #             # :include => [...],
+  #             :except => [:created_at, :updated_at]
+  #         ))
+  # end
 end

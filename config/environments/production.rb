@@ -20,7 +20,7 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_files = false
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -93,10 +93,4 @@ Rails.application.configure do
 
   ActionMailer::Base.default :from => ENV['smtp_username']
 
-  config.middleware.use ExceptionNotification::Rack,
-                        :email => {
-                            :email_prefix => "[Exception][NUOVO-PROGETTO] ",
-                            :sender_address => %{"Nuovo progetto" <support@moku.io>},
-                            :exception_recipients => %w{michele@moku.io}
-                        }
 end

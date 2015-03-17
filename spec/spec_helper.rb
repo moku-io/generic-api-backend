@@ -83,6 +83,9 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.start
     @user = User.first
+
+    # allow_any_instance_of(Share).to receive(:is_mounted?) { true }
+    # allow_any_instance_of(Share).to receive(:mount_dir) { File.expand_path('tmp/share_mock') }
   end
 
   config.after(:each) do
@@ -98,4 +101,19 @@ RspecApiDocumentation.configure do |config|
   config.curl_headers_to_filter = ['Host', 'Cookie']
   config.docs_dir = Rails.root.join('doc', 'api')
   config.keep_source_order = true
+end
+
+
+def stub_auth
+  @new_token = @user.create_new_auth_token
+
+  header 'token-type',   'Bearer'
+  header 'uid',          @new_token['uid']
+  header 'access-token', @new_token['access-token']
+  header 'client',       @new_token['client']
+  header 'expiry',       10.minutes.from_now.to_i.to_s
+end
+
+shared_context 'authorized', :authorized => true do
+  before { stub_auth }
 end

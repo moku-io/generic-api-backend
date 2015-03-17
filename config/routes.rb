@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'api/auth'
 
   # Active Admin
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  #make devise available for the global scope
-  devise_for :users, :skip => [:sessions, :passwords, :registrations]
-
   namespace :api, defaults: { format: 'json' } do
-    # YES. BOTH DEVISES ARE NEEDED
-    devise_for :users, :skip => [:passwords, :registrations]
+    # make devise available for the global scope (confirmable, password resets...)
+    # devise_for :users, :skip => [:sessions, :passwords, :registrations]
 
+    # resources :users, only: [:show, :update]
 
 
   end
