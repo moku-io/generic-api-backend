@@ -22,14 +22,32 @@ server {
 server {
 
 <% if fetch(:nginx_use_ssl) %>
-  listen 443 ssl spdy; # deferred;
+  listen 443 ssl http2;
   ssl on;
   ssl_certificate <%= fetch(:nginx_ssl_certificate_path) %>/<%= fetch(:nginx_ssl_certificate) %>;
-  ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>;
+  ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>
+  ssl_dhparam <%= fetch(:nginx_ssl_certificate_key_path) %>/dhparams.pem;   # Create a new one with: openssl dhparam -out dhparams.pem 2048
+  ssl_prefer_server_ciphers on;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;  # don’t use SSLv3 ref: POODLE
+  # BE CAREFUL: with the following ssl_ciphers IE8 is not supported!
+  ssl_ciphers "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!3DES:!MD5:!PSK";
+  # With the following ssl_ciphers IE8 is supported, but system will be less secure.
+  #ssl_ciphers "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA";
+
+  ssl_stapling on;
+  ssl_stapling_verify on;
+  ssl_trusted_certificate <%= fetch(:nginx_ssl_certificate_ca_path) %>/<%= fetch(:nginx_ssl_certificate_ca) %>;
+  resolver 8.8.4.4 8.8.8.8 valid=300s;
+  resolver_timeout 10s;
+
+  ssl_session_cache shared:SSL:32m;
+  ssl_buffer_size 8k;
+  ssl_session_timeout 10m;
 <% else %>
-  listen 80; # deferred;
+  listen 80 deferred;
 <% end %>
+
+  server_tokens off;
 
   server_name <%= fetch(:nginx_domains) %>;
   root        <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>;
@@ -64,7 +82,7 @@ server {
     gzip_min_length  1100;
     gzip_buffers  4 32k;
     gzip_comp_level 4;
-    gzip_types    text/plain application/x-javascript text/xml text/css;
+    gzip_types    text/plain application/x-javascript text/xml text/css application/json;
     gzip_vary on;
 
     proxy_set_header X-Real-IP $remote_addr;

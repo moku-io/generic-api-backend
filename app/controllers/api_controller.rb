@@ -2,7 +2,7 @@ class ApiController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
   protect_from_forgery with: :null_session
 
-  before_filter :set_locale
+  before_action :set_locale
   before_action :set_client_info
 
 

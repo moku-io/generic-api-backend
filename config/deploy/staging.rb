@@ -21,13 +21,17 @@ server 'staging.my-new-app.moku.io', user: 'deploy', roles: %w{web app db}, my_p
 set :nginx_domains, 'staging.my-new-app.moku.io'
 
 # Puma settings
-set :puma_threads, [0, 16]
-set :puma_workers, 0
+set :puma_threads, [0, 4]
+set :puma_workers, 1
 
 # Disable multithreading  # http://omegadelta.net/2013/06/16/puma-on-heroku-with-mri/
 # set :puma_threads, [1, 1]
 # set :puma_workers, 5
 
+# Guidelines:
+# - One worker per core
+# - Threads to be determined in connection with RAM availability and application and
+# - Threads = Connection Pool (database)
 
 
 # Custom SSH Options

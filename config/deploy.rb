@@ -34,6 +34,11 @@ set :nginx_template, "#{stage_config_path}/nginx.conf.erb"
 set :app_server, true
 set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
 
+# Delayed jobs
+set :delayed_job_workers, 1
+set :delayed_job_queues, ['autoplak']
+set :delayed_job_roles, [:app, :background]
+
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
@@ -44,7 +49,7 @@ set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/application.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_dirs,  %w{log tmp/cache public/assets public/system}
+set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -55,6 +60,7 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/log -p"
       execute "mkdir #{shared_path}/public/system -p"
       execute "mkdir #{shared_path}/db_backups -p"
+      execute "mkdir #{shared_path}/ssl -p"
     end
   end
 
@@ -85,4 +91,8 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
   after  :finished,     'airbrake:deploy'
+end
+
+after 'deploy:published', 'restart' do
+  invoke 'delayed_job:restart'
 end

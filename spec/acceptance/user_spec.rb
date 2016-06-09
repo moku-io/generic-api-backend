@@ -6,10 +6,6 @@ resource 'User' do
     header 'Accept', 'application/vnd.my-new-app.v1+json'
     header 'Client-Version', 'Web/1.1'
 
-    # let(:email) { 'dsds'.to_s }
-    # let(:token) { 'dssdds'.to_s }
-    let(:clientaaa) { 'dssdssd'.to_s }
-
     example 'Sign-up' do
       do_request(email: 'new_user@domain.com',
                  password: 'exampleexample',

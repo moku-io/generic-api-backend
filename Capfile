@@ -17,13 +17,11 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/rails
 #
 require 'capistrano/rvm'
-require 'capistrano/bundler'
 require 'capistrano/rails'
-# require 'capistrano/rails/assets'
-# require 'capistrano/rails/migrations'
 require 'capistrano/nginx'
 require 'capistrano/puma'
 require 'capistrano/puma/monit'
+require 'capistrano/delayed-job'
 require 'whenever/capistrano'
 require 'airbrake/capistrano3'
 

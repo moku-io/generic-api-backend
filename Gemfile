@@ -30,7 +30,6 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'byebug'
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
@@ -53,15 +52,19 @@ group :development do
   gem 'capistrano-bundler',         require: false
   gem 'capistrano3-nginx', '2.0.2', require: false
   gem 'capistrano3-puma',           require: false
+  gem 'capistrano3-delayed-job',    require: false
 end
 
 gem 'annotate'
 
-gem 'whenever'
+gem 'whenever', github: 'micred/whenever'  # Whenever fork because of https://github.com/javan/whenever/issues/554
 
 gem 'figaro'
 
 gem 'paperclip'
+
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 # CORS
 gem 'rack-cors'
@@ -71,6 +74,6 @@ gem 'devise'
 gem 'devise_token_auth'
 gem 'cancan'
 
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', '1.0.0pre1'
 
 gem 'airbrake'

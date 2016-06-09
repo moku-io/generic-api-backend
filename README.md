@@ -5,6 +5,7 @@
 It is a blank Rails app, preconfigured with:
 - basic authentication via token ([Devise] + [CanCan]);
 - full deploy setup ([Capistrano] + [nginx] + [puma]);
+- auto generate SSL certificate for HTTPS (and auto renew) with [Let's Encrypt]﻿; 
 - gems for API testing and documentation ([RSpec API documentation] + [Raddocs]);
 - basic administration backend ([ActiveAdmin]);
 - CORS and URL regex ([rack-cors]);
@@ -17,8 +18,10 @@ Deployment stack is the following:
 - nginx configured via Capistrano task;
 - Puma configured via Capistrano task;
 - crontab with [whenever];
+- asynchronous jobs with [delayed-job]﻿;
 - auto backups for PostgreSQL;
 - environment variables with [figaro];
+- error notification with [airbrake]﻿;
 - both production and staging environments configured for Capistrano/nginx/puma;
 - configurable exception notification via email ([exception_notification]).
 
@@ -53,13 +56,16 @@ rake db:migrate
 [Capistrano]:https://github.com/capistrano/capistrano
 [nginx]:http://nginx.org/
 [puma]:https://github.com/puma/puma
+[Let's Encrypt]:https://letsencrypt.org
 [RSpec API documentation]:https://github.com/zipmark/rspec_api_documentation
 [Raddocs]:https://github.com/smartlogic/raddocs
 [ActiveAdmin]:https://github.com/gregbell/active_admin
 [rack-cors]:https://github.com/cyu/rack-cors
 [exception_notification]:https://github.com/smartinez87/exception_notification
 [whenever]:https://github.com/javan/whenever
+[delayed-job]:https://github.com/collectiveidea/delayed_job
 [Figaro]:https://github.com/laserlemon/figaro
+[airbrake]:https://github.com/airbrake/airbrake
 
 
 
