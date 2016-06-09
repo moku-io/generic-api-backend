@@ -76,4 +76,4 @@ gem 'cancan'
 
 gem 'activeadmin', '1.0.0pre1'
 
-gem 'airbrake'
+gem 'airbrake', '~> 4.1.0'
