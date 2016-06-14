@@ -76,6 +76,15 @@ GIT
       rails (< 6)
 
 GIT
+  remote: git://github.com/modeset/apitome.git
+  revision: 93cdad16d6117cbb353f83e034d22e93ec3eea7e
+  specs:
+    apitome (0.1.0)
+      kramdown
+      railties
+      rspec_api_documentation
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: bcdd54cc5ebd3413eeb3d17e3b634e8ace0d09f3
   specs:
@@ -223,6 +232,7 @@ GEM
     kaminari-i18n (0.4.0)
       kaminari
       rails
+    kramdown (1.11.1)
     libv8 (3.16.14.15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -362,6 +372,7 @@ DEPENDENCIES
   activeadmin!
   airbrake (= 4.3.5)
   annotate
+  apitome!
   byebug
   cancancan!
   capistrano (= 3.4.0)

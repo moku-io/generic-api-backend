@@ -35,5 +35,9 @@ module GenericBackend
                  :max_age => 600
       end
     end
+
+    config.after_initialize do
+      Apitome.configuration.mount_at = '/docs'  # http://stackoverflow.com/a/34921974/930720
+    end
   end
 end

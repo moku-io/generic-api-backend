@@ -16,7 +16,12 @@ Rails.application.routes.draw do
 
   end
 
-  mount Raddocs::App => '/docs'
+  # If authenticated, show the docs.
+  authenticated :admin_user do
+    mount Apitome::Engine => '/docs'
+  end
+  # If not authenticated, redirect to login.
+  get 'docs', to: 'admin/dashboard#index'
 
   root to: 'admin/dashboard#index'
 end

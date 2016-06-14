@@ -95,8 +95,8 @@ end
 
 
 RspecApiDocumentation.configure do |config|
-  config.format = [:json, :combined_text, :html]
-  config.api_name = 'Backend API'
+  config.format = :json
+  config.api_name = 'GenericBackend API'
   config.curl_host = 'http://my-new-app.moku.io'
   config.curl_headers_to_filter = ['Host', 'Cookie']
   config.docs_dir = Rails.root.join('doc', 'api')

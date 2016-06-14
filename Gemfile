@@ -38,8 +38,7 @@ group :development, :test do
 end
 
 # Docs
-# gem 'raddocs', github: 'smartlogic/raddocs' # TEMP DISABLED https://github.com/smartlogic/raddocs/issues/32
-# gem 'sinatra', github: 'sinatra/sinatra', branch: 'master' # TEMP RAILS 5
+gem 'apitome', github: 'modeset/apitome'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

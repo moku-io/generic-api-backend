@@ -6,7 +6,7 @@ It is a blank Rails app, preconfigured with:
 - basic authentication via token ([Devise] + [CanCan]);
 - full deploy setup ([Capistrano] + [nginx] + [puma]);
 - auto generate SSL certificate for HTTPS (and auto renew) with [Let's Encrypt]﻿; 
-- gems for API testing and documentation ([RSpec API documentation] + [Raddocs]);
+- gems for API testing and documentation ([RSpec API documentation] + [Apitome]);
 - basic administration backend ([ActiveAdmin]);
 - CORS and URL regex ([rack-cors]);
 - API versioning via headers.
@@ -58,7 +58,7 @@ rake db:migrate
 [puma]:https://github.com/puma/puma
 [Let's Encrypt]:https://letsencrypt.org
 [RSpec API documentation]:https://github.com/zipmark/rspec_api_documentation
-[Raddocs]:https://github.com/smartlogic/raddocs
+[Apitome]:https://github.com/modeset/apitome
 [ActiveAdmin]:https://github.com/gregbell/active_admin
 [rack-cors]:https://github.com/cyu/rack-cors
 [exception_notification]:https://github.com/smartinez87/exception_notification
