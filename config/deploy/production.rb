@@ -15,25 +15,18 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'my-new-app.moku.io', user: 'deploy', roles: %w{web app db}, my_property: :my_value
+server 'my-new-app.moku.io', user: 'deploy', roles: %w{web app db}, primary: true, my_property: :my_value
 
 # Nginx settings
 set :nginx_domains, 'my-new-app.moku.io'
-set :nginx_use_ssl, true
-
-# Name of SSL certificate file
-set :nginx_ssl_certificate, 'xxx_com-bundle.crt'
-set :nginx_ssl_certificate_path, "#{shared_path}/ssl"
-set :nginx_ssl_certificate_key, 'xxx_com.key'
-set :nginx_ssl_certificate_key_path, "#{shared_path}/ssl"
-set :nginx_ssl_certificate_ca, 'intermediate_and_ca.crt'  # As nginx_ssl_certificate bundle, but without the first one (this domain); https://www.digitalocean.com/community/tutorials/how-to-configure-ocsp-stapling-on-apache-and-nginx
-set :nginx_ssl_certificate_ca_path, "#{shared_path}/ssl"
+set :redirect_address_without_www, false  # It strips the 'www.' from the first domain in :nginx_domains and add an auto-redirect from domain.com to www.domain.com (both http and https).
 
 # Puma settings
 set :puma_threads, [0, 4]
 set :puma_workers, 1
 
 # Disable multithreading  # http://omegadelta.net/2013/06/16/puma-on-heroku-with-mri/
+# Remember to enable preload_app! to speed things up. But check glitches with hot-restart.
 # set :puma_threads, [1, 1]
 # set :puma_workers, 5
 
@@ -41,6 +34,22 @@ set :puma_workers, 1
 # - One worker per core
 # - Threads to be determined in connection with RAM availability and application and
 # - Threads = Connection Pool (database)
+
+
+# SSL settings
+set :nginx_use_ssl, true
+
+set :lets_encrypt_domains, 'my-new-app.moku.io'
+set :lets_encrypt_email, 'info@moku.io'
+
+set :nginx_ssl_certificate, 'fullchain.pem'
+set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
+set :nginx_ssl_certificate_key, 'privkey.pem'
+set :nginx_ssl_certificate_key_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
+set :nginx_ssl_certificate_ca, 'chain.pem'  # As nginx_ssl_certificate bundle, but without the first one (this domain); https://www.digitalocean.com/community/tutorials/how-to-configure-ocsp-stapling-on-apache-and-nginx
+set :nginx_ssl_certificate_ca_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
+set :nginx_dhparam, 'dhparams.pem'
+set :nginx_dhparam_path, "#{shared_path}/ssl"
 
 
 # Custom SSH Options

@@ -8,3 +8,7 @@ every 1.day, :at => '4:15 am' do
   command "find \"#{File.expand_path('../../shared/db_backups')}/\" -type f -name \"#{ENV['db_name']}_*sql.gz\" -mtime +90 -exec rm {} \\;"
   command "sh -c 'PGPASSWORD=\"#{ENV['db_password']}\" pg_dump -h #{ENV['db_host']} -U #{ENV['db_username']} #{ENV['db_name']} | gzip > \"#{File.expand_path('../../shared/db_backups')}/#{ENV['db_name']}_`date +%F_%H%M`.sql.gz\"'"
 end
+
+every 1.day, :at => '4:00 am' do
+  command 'sleep $[ ( $RANDOM % 100 )  + 1 ]s && sudo letsencrypt renew && sleep 30 && sudo service nginx reload'
+end
