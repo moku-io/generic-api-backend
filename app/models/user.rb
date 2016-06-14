@@ -34,7 +34,7 @@
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Now disabled: :omniauthable
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,

@@ -22,7 +22,7 @@
 #  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-class AdminUser < ActiveRecord::Base
+class AdminUser < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, 
