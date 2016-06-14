@@ -114,7 +114,7 @@ namespace :deploy do
     on roles(:app) do
       # Run letsencrypt to generate the certs
       domains_list = fetch(:lets_encrypt_domains).split(' ').collect{|d| "-d #{d}"}.join(' ')
-      execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list}"
+      execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list} --email #{fetch(:lets_encrypt_email)} --agree-tos"
 
       # Generate DH parameters for EDH ciphers
       execute "mkdir #{shared_path}/ssl -p"
