@@ -35,6 +35,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation', branch: 'rspec-3.5'
   gem 'annotate'
+  gem 'faker'
 end
 
 # Docs
