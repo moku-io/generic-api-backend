@@ -20,6 +20,7 @@
 /temp
 *.swp
 *~
+.byebug_history
 .project
 .DS_Store
 .idea

@@ -30,10 +30,10 @@ gem 'redis', '~> 3.0'
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '3.5.0.beta4'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'rspec_api_documentation'
+  gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation', branch: 'rspec-3.5'
   gem 'annotate'
 end
 

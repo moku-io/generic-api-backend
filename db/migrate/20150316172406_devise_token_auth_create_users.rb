@@ -2,7 +2,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Required
-      t.string :provider, :null => false
+      t.string :provider, :null => false, :default => "email"
       t.string :uid, :null => false, :default => ""
 
       ## Database authenticatable
@@ -40,7 +40,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
       t.string :email
 
       ## Tokens
-      t.text :tokens
+      t.json :tokens
 
       t.timestamps null: false
     end

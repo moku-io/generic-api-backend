@@ -3,7 +3,7 @@
 > To goal of this project is to have a production-ready deploy of an Rails 4 API backend in a few minutes.
 
 It is a blank Rails app, preconfigured with:
-- basic authentication via token ([Devise] + [CanCan]);
+- basic authentication via token ([Devise] + [CanCan] + [Devise Token Auth]);
 - full deploy setup ([Capistrano] + [nginx] + [puma]);
 - auto generate SSL certificate for HTTPS (and auto renew) with [Let's Encrypt]﻿; 
 - gems for API testing and documentation ([RSpec API documentation] + [Apitome]);
@@ -13,7 +13,7 @@ It is a blank Rails app, preconfigured with:
 
 
 Deployment stack is the following:
-- Rails 4.1;
+- Rails 5;
 - Capistrano 3;
 - nginx configured via Capistrano task;
 - Puma configured via Capistrano task;
@@ -53,6 +53,7 @@ rake db:migrate
 
 [Devise]:https://github.com/plataformatec/devise
 [CanCan]:https://github.com/ryanb/cancan
+[Devise Token Auth]:https://github.com/lynndylanhurley/devise_token_auth
 [Capistrano]:https://github.com/capistrano/capistrano
 [nginx]:http://nginx.org/
 [puma]:https://github.com/puma/puma

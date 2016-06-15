@@ -12,13 +12,25 @@ smtp_authentication: 'plain'
 smtp_starttls: 'true'
 
 development:
-  s3_bucket: "xxxx-development"
+  db_host: localhost
+  db_username: postgres
+  db_password: postgres
+  db_name: xxxx-development
+  s3_bucket: xxxx-development
 
 test:
-  s3_bucket: "xxxx-development"
+  db_host: localhost
+  db_username: postgres
+  db_password: postgres
+  db_name: xxxx-test
+  s3_bucket: xxxx-test
 
 staging:
-  s3_bucket: "xxxx-staging"
+  db_host: localhost
+  db_username: postgres
+  db_password: xxxxxxxxxxx
+  db_name: xxxx-staging
+  s3_bucket: xxxx-staging
 
 production:
   secret_key_base: 1a26fee9e7c1c50624e29510e89dbe68f01d71f248ee44660ba11f0f97100a450e971a1b092fe84e85135b2074684753d2cf461a8e8ee506cd80f2bc8865d987
