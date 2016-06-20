@@ -39,7 +39,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable
-  include DeviseTokenAuth::Concerns::User
+
+  include DeviseTokenAuth::Concerns::User  # This must be after devise config, never before.
 
 
   # Sarbanes-Oxley Compliance: http://en.wikipedia.org/wiki/Sarbanes%E2%80%93Oxley_Act

@@ -75,11 +75,13 @@ namespace :deploy do
     before 'deploy:restart', 'puma:start'
 
     on roles(:app) do
+      set(:nginx_use_ssl, false)
       invoke 'deploy'
       invoke 'deploy:lets_encrypt' if fetch(:nginx_use_ssl)
       invoke 'nginx:site:add'
       invoke 'nginx:site:enable'
       invoke 'puma:monit:config'
+      invoke 'my_delayed_job:monit:config'
     end
   end
 
@@ -128,6 +130,24 @@ namespace :deploy do
       set(:nginx_use_ssl, true)
       invoke 'deploy:lets_encrypt'
       invoke 'nginx:site:add'
+    end
+  end
+
+  namespace :my_delayed_job do
+    namespace :monit do
+      desc 'Configure monit for delayed_job'
+      task :config do
+        on roles(:app), in: :sequence, wait: 5 do
+          within fetch(:sites_available) do
+            config_file = File.expand_path('../deploy/delayed_job_monit.conf.erb', __FILE__)
+            config = ERB.new(File.read(config_file)).result(binding)
+
+            upload! StringIO.new(config), '/tmp/delayed_job.conf'
+            arguments = :sudo, :mv, '/tmp/delayed_job.conf', "/etc/monit/conf.d/delayed_job_#{fetch(:application)}.conf"
+            execute *arguments
+          end
+        end
+      end
     end
   end
 

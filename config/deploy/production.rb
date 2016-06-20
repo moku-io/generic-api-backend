@@ -39,7 +39,7 @@ set :puma_workers, 1
 # SSL settings
 set :nginx_use_ssl, true
 
-set :lets_encrypt_domains, 'my-new-app.moku.io'
+set :lets_encrypt_domains, 'my-new-app.moku.io www.my-new-app.moku.io'
 set :lets_encrypt_email, 'info@moku.io'
 
 set :nginx_ssl_certificate, 'fullchain.pem'
