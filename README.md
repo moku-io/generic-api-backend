@@ -72,41 +72,68 @@ rake db:migrate
 
 
 
- TMP
+# Basic commands
 
-Deploy ultima versione del branch develop in ambiente staging
+## Import sample data for development purpose
+```sh
+rake dev_setup:import_sample_data
+```
+
+## Deploy last develop branch in staging environment
+```sh
 cap staging deploy
+```
 
-Deploy revision a56ffeaed78a80a6d3afebfeaee1c1e4da3775b9 in ambiente staging
+## Deploy revision a56ffeaed78a80a6d3afebfeaee1c1e4da3775b9 in staging environment
+```sh
 REVISION=f37d74ab7ec1fba90e21444299000128e7783a86 cap staging deploy
+```
 
-È possibile anche pubblicare feature branch a patto non siano branch locali (git-flow publish)
+## Deploy a feature branch (not local branch, you have to publish with git-flow publish)
+```sh
 REVISION=feature/ZAT-557-capistrano-setup cap staging deploy
+```
 
-Deploy ultima versione del branch master in ambiente produzione:
+## Deploy last master branch in production environment:
+```sh
 REVISION=master cap production deploy
+```
+Notice: it's strongly suggested to make a revision with git-flow release
 
-N.B.Per produzione meglio fare una release con git flow
 
-
-Comandi extra
+## Extra commands
 Restart
+```sh
 cap <env> deploy:restart
+```
 
 Restart nginx
+```sh
 cap <env> nginx:restart
 cap <env> nginx:reload
+```
 
-Lista task Capistrano
+List Capistrano tasks
+```sh
 cap -vT
-
+```
 
 Logs:
-cd ~/apps/hfarm_user_admin_production/current/log/
+```sh
+ssh deploy@serveraddress.com
+cd ~/apps/appname_production/current/log/
+```
 
 Console:
-cd ~/apps/hfarm_user_admin_production/current
+```sh
+ssh deploy@serveraddress.com
+cd ~/apps/appname_production/current
 RAILS_ENV=production bundle exec rails c
+```
 
-
-MONIT nginx
+## Clear delayed jobs queue
+```sh
+ssh deploy@serveraddress.com
+cd ~/apps/appname_production/current
+RAILS_ENV=production bundle exec rake jobs:clear
+```

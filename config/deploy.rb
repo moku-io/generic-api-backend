@@ -49,7 +49,7 @@ set :delayed_job_roles, [:app, :background]
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/application.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system}
+set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system public/.well-known}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -59,6 +59,7 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/pids -p"
       execute "mkdir #{shared_path}/tmp/log -p"
       execute "mkdir #{shared_path}/public/system -p"
+      execute "mkdir #{shared_path}/public/.well-known -p"
       execute "mkdir #{shared_path}/db_backups -p"
       execute "mkdir #{shared_path}/ssl -p"
       execute "mkdir #{shared_path}/nginx_cache -p"
@@ -71,7 +72,7 @@ end
 namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
-    before 'deploy:migrate', 'db_create'
+    before 'deploy:updated', 'db_create'
     before 'deploy:restart', 'puma:start'
 
     on roles(:app) do
