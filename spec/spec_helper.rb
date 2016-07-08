@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+include ActionDispatch::TestProcess
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -73,6 +74,11 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+
+  config.before(:all) do
+      FileUtils.mkdir_p "#{Rails.root}/tmp/test_uploads"
+  end
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation#, {:except => %w()}
     DatabaseCleaner.clean_with(:truncation)
@@ -90,6 +96,13 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.after(:all) do
+    if Rails.env.test?
+      test_uploads = Dir["#{Rails.root}/tmp/test_uploads"]
+      FileUtils.rm_rf(test_uploads)
+    end
   end
 end
 
