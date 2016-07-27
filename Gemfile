@@ -4,7 +4,7 @@ ruby '2.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
-gem 'rack', github: 'rack/rack'
+gem 'rack', '~> 2.0.1'
 gem 'rails-i18n', '~> 5.0.0.beta4'
 
 gem 'pg'
@@ -30,10 +30,10 @@ gem 'redis', '~> 3.0'
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails', '3.5.0.beta4'
+  gem 'rspec-rails', '~> 3.5.0'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation', branch: 'rspec-3.5'
+  gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation'
   gem 'annotate'
   gem 'faker'
 end
@@ -60,6 +60,8 @@ group :development do
   gem 'web-console', '~> 3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'awesome_print'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -98,7 +100,7 @@ gem 'airbrake', '4.3.5'
 gem 'figaro'
 
 gem 'paperclip'
-# gem 'aws-sdk', '< 2.0'
+# gem 'aws-sdk', '>= 2.0'
 
 gem 'delayed_job_active_record'
 gem 'delayed_job', github: 'collectiveidea/delayed_job'  # TEMP rails 5
