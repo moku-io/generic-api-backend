@@ -21,7 +21,7 @@ require 'capistrano/rails'
 require 'capistrano/nginx'
 require 'capistrano/puma'
 require 'capistrano/puma/monit'
-require 'capistrano/delayed-job'
+require 'capistrano/delayed_job'
 require 'whenever/capistrano'
 require 'airbrake/capistrano3'
 

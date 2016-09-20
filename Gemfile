@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
-#ruby-gemset=rails5
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
@@ -61,7 +60,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  gem 'awesome_print'
+  gem 'awesome_print', require: 'ap'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -104,4 +103,4 @@ gem 'paperclip'
 
 gem 'delayed_job_active_record'
 gem 'delayed_job', github: 'collectiveidea/delayed_job'  # TEMP rails 5
-gem 'daemons'
+gem 'daemons' # Needed by delayed_job

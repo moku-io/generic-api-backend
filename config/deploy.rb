@@ -51,8 +51,9 @@ set :linked_files, %w{config/application.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system public/.well-known}
 
-namespace :puma do
-  desc 'Create Directories for Puma Pids and Socket'
+
+namespace :deploy do
+  desc 'Create required directories'
   task :make_dirs do
     on roles(:app) do
       execute "mkdir #{shared_path}/tmp/sockets -p"
@@ -64,12 +65,9 @@ namespace :puma do
       execute "mkdir #{shared_path}/ssl -p"
       execute "mkdir #{shared_path}/nginx_cache -p"
     end
+    before 'deploy:starting', 'deploy:make_dirs'
   end
 
-  before :start, :make_dirs
-end
-
-namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     before 'deploy:updated', 'db_create'
@@ -82,7 +80,7 @@ namespace :deploy do
       invoke 'nginx:site:add'
       invoke 'nginx:site:enable'
       invoke 'puma:monit:config'
-      invoke 'my_delayed_job:monit:config'
+      invoke 'deploy:my_delayed_job:monit:config'
     end
   end
 

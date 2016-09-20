@@ -2,6 +2,7 @@
 
 aws_access_key_id: xxxx
 aws_secret_access_key: xxxx
+aws_region: eu-west-1
 
 smtp_address: 'smtp.gmail.com'
 smtp_port: '587'

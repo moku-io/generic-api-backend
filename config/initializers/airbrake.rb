@@ -1,8 +1,14 @@
+#TODO When upgrading to Airbrake 5 requires are not needed anymore.
+require 'rake'
+require 'airbrake/rake_handler'
+
 Airbrake.configure do |config|
   config.api_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   config.host    = 'errors.moku.io'
   config.port    = 80
   config.secure  = config.port == 443
+
+  config.rescue_rake_exceptions = true  #TODO When upgrading to Airbrake 5 this is not needed anymore.
 end
 
 
