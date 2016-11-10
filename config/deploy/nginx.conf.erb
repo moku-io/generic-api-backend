@@ -123,6 +123,11 @@ send_timeout 300s;
     <% else %>
         proxy_set_header X-Forwarded-Proto http;
     <% end %>
+
+    # Pass caching headers to Rails, otherwise ConditionalGet doesn't work.
+    proxy_set_header If-Modified-Since $http_if_modified_since;
+    proxy_set_header If-None-Match $http_if_none_match;
+
     # we don't want nginx trying to do something clever with
     # redirects, we set the Host: header above already.
     proxy_redirect off;
