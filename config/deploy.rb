@@ -104,7 +104,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :rake, 'db:create'
+          execute :rake, 'db:create' rescue nil
         end
       end
     end
