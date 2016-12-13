@@ -1,5 +1,6 @@
 # config valid only for Capistrano 3.1
 lock '3.4.0'
+set :rvm_ruby_version, '2.3.3'
 
 set :application,   "xxx_#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxx/xxx.git'
@@ -65,13 +66,13 @@ namespace :deploy do
       execute "mkdir #{shared_path}/ssl -p"
       execute "mkdir #{shared_path}/nginx_cache -p"
     end
-    before 'deploy:starting', 'deploy:make_dirs'
   end
 
   desc 'Initial Deploy'
   task :initial do
+    before 'deploy:starting', 'deploy:make_dirs'
     before 'deploy:updated', 'db_create'
-    before 'deploy:restart', 'puma:start'
+    # before 'deploy:restart', 'puma:start'
 
     on roles(:app) do
       set(:nginx_use_ssl, false)
