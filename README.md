@@ -26,16 +26,19 @@ Deployment stack is the following:
 - configurable exception notification via email ([exception_notification]).
 
 
-See wiki article on how setup the server accordinly (TODO).
+See wiki article on how setup the server accordingly (TODO).
 
 
 ## Getting started
+- copy entire folder (including hidden file .rspec)
 - rename project name module
 - nome git
 - nome database
 - update application.yml da application.example.yml
-- nome app su deploy
+- nome app su deploy.rb 
 - indirizzo server
+- setup Airbrake
+- edit this README
 
 
 rake db:migrate

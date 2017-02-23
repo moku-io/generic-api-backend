@@ -35,6 +35,9 @@ group :development, :test do
   gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation'
   gem 'annotate'
   gem 'faker'
+  gem 'rubocop', require: false
+  gem 'simplecov', require: false
+  gem 'bullet'
 end
 
 # Docs

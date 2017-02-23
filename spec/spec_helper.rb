@@ -1,3 +1,9 @@
+# Load test coverage gem.
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter 'app/admin'
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -82,13 +88,11 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation#, {:except => %w()}
     DatabaseCleaner.clean_with(:truncation)
-
-    @user = FactoryGirl.create(:user)
   end
 
   config.before(:each) do
     DatabaseCleaner.start
-    @user = User.first
+    @user = FactoryGirl.create(:user)
 
     # allow_any_instance_of(Share).to receive(:is_mounted?) { true }
     # allow_any_instance_of(Share).to receive(:mount_dir) { File.expand_path('tmp/share_mock') }

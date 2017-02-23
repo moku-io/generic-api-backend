@@ -1,24 +1,6 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
 
-  controller do
-    def create
-      params[:user][:uid] = params[:user][:email]
-      params[:user][:provider] = 'email'
-      super
-    end
-
-    def update
-      params[:user][:uid] = params[:user][:email]
-      if params[:user][:password].blank?
-        # Ignore password change if no password is changed in AA.
-        params[:user].delete(:password)
-        params[:user].delete(:password_confirmation)
-      end
-      super
-    end
-  end
-
   index do
     selectable_column
     id_column

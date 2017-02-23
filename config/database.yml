@@ -4,7 +4,7 @@ development: &default
   host: <%= ENV['db_host'] || 'localhost' %>
   username: <%= ENV['db_username'] || 'postgres' %>
   password: <%= ENV['db_password'] || 'postgres' %>
-  database: <%= ENV['db_name'] || 'newapp-development' %>
+  database: <%= ENV['db_name'] || 'xxxx-development' %>
   pool: 5
   timeout: 5000
 
@@ -13,6 +13,7 @@ development: &default
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  database: <%= ENV['db_name'] || 'xxxx-test' %>
 
 staging:
   <<: *default

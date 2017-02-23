@@ -24,6 +24,7 @@
 .project
 .DS_Store
 .idea
+coverage
 db/schema.rb
 /public/javascripts/translations.js
 /public/system/

@@ -4,4 +4,15 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   protect_from_forgery with: :null_session, only: Proc.new { |c| c.request.format.json? }  # Temp solution: https://github.com/lynndylanhurley/devise_token_auth/issues/398
 
+  before_action :set_locale
+
+
+  private
+  def set_locale
+    begin
+      I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first unless request.env['HTTP_ACCEPT_LANGUAGE'].nil?
+    rescue
+      logger.error 'Invalid locale. HTTP_ACCEPT_LANGUAGE = ' + request.env['HTTP_ACCEPT_LANGUAGE'].to_s
+    end
+  end
 end

@@ -2,8 +2,8 @@
 lock '3.4.0'
 set :rvm_ruby_version, '2.3.3'
 
-set :application,   "xxx_#{fetch(:stage)}"
-set :repo_url, 'git@bitbucket.org:xxx/xxx.git'
+set :application,   "xxxx_#{fetch(:stage)}"
+set :repo_url, 'git@bitbucket.org:xxxx/xxxx.git'
 
 # Default branch is 'develop'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
