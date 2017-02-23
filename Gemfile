@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.0'
 # Action Cable dependencies for the Redis adapter
 gem 'redis', '~> 3.0'
 
+gem 'puma', group: [:production, :staging]
+
 
 group :development, :test do
   gem 'byebug'
@@ -37,16 +39,16 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop', require: false
   gem 'simplecov', require: false
-  gem 'bullet'
 end
+
+# Optimizing N+1 queries
+gem 'bullet', group: [:test, :development, :staging]
 
 # Docs
 gem 'apitome', github: 'modeset/apitome'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-gem 'puma', group: [:production, :staging]
 
 group :development do
   # Use Capistrano for deployment

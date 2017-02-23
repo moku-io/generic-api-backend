@@ -66,12 +66,12 @@ Rails.application.configure do
   # config.action_mailer.perform_deliveries = true   ### Uncomment to send email in development.
 
 
-  # Bullet
+  # Bullet for optimizing N+1 queries
   config.after_initialize do
     Bullet.enable = true
     # Bullet.alert = true
     Bullet.bullet_logger = true
-    Bullet.console = true
+    # Bullet.console = true
     # Bullet.growl = true
     # Bullet.xmpp = { :account  => 'bullets_account@jabber.org',
     #                 :password => 'bullets_password_for_jabber',
@@ -82,7 +82,7 @@ Rails.application.configure do
     # Bullet.bugsnag = true
     # Bullet.airbrake = true
     # Bullet.rollbar = true
-    Bullet.add_footer = true
+    # Bullet.add_footer = true
     # Bullet.stacktrace_includes = [ 'your_gem', 'your_middleware' ]
     # Bullet.stacktrace_excludes = [ 'their_gem', 'their_middleware' ]
     # Bullet.slack = { webhook_url: 'http://some.slack.url', channel: '#default', username: 'notifier' }
