@@ -140,3 +140,19 @@ ssh deploy@serveraddress.com
 cd ~/apps/appname_production/current
 RAILS_ENV=production bundle exec rake jobs:clear
 ```
+
+
+# Frontend
+
+## Password reset
+
+[Password reset flow]
+
+- ng-token-auth will [POST /api/auth/password] with two params: email and redirect_url.
+- Backend will send an email to the user with a reset url.
+- When user click on the link in the email, backend validates the token and redirect to frontend (redirect_url), passing a 6 hours temporary session (uid, token, client_id...) that let the user to change his password.
+
+
+
+[Password reset flow]: https://github.com/lynndylanhurley/ng-token-auth#password-reset-flow
+[POST /api/auth/password]: http://localhost:3017/docs/user/password_reset

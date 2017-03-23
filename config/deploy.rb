@@ -115,6 +115,8 @@ namespace :deploy do
   task :lets_encrypt do
     on roles(:app) do
       # Run letsencrypt to generate the certs
+      # Prerequisites:
+      #    sudo apt-get install letsencrypt
       domains_list = fetch(:lets_encrypt_domains).split(' ').collect{|d| "-d #{d}"}.join(' ')
       execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list} --email #{fetch(:lets_encrypt_email)} --agree-tos"
 
@@ -156,7 +158,7 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
   after  :finished,     :clear_cache
-  after  :finished,     'airbrake:deploy'
+  # after  :finished,     'airbrake:deploy'
 end
 
 after 'deploy:published', 'restart' do  # Temp https://github.com/collectiveidea/delayed_job/issues/881

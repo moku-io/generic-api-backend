@@ -77,7 +77,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', github: 'plataformatec/devise'
 gem 'devise-i18n'
 gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth'
-gem 'cancancan', github: 'CanCanCommunity/cancancan'
+gem 'cancancan', '~> 1.16.0'
 
 
 ###
