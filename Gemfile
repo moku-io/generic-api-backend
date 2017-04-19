@@ -99,8 +99,8 @@ gem 'rack-cors'
 
 gem 'whenever', github: 'javan/whenever'
 
-gem 'airbrake', '5.6.1'
-gem 'airbrake-ruby', '1.6.0'
+gem 'airbrake', '6.0.0'
+gem 'airbrake-ruby', '2.0.0'
 
 gem 'figaro'
 
