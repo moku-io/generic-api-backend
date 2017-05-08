@@ -74,21 +74,16 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 ###
 ## Authentication and Authorization
-gem 'devise', github: 'plataformatec/devise'
+gem 'devise', '~> 4.2.1'
 gem 'devise-i18n'
-gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth'
+gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth' #TODO appena sarà rilasciato mettere '~> 0.1.41'
 gem 'cancancan', '~> 1.16.0'
 
 
 ###
 ## Active Admin and pagination
-gem 'activeadmin', github: 'activeadmin/activeadmin', branch: 'master'
-
-gem 'formtastic', github: 'justinfrench/formtastic', branch: 'master'  # TEMP UNTIL RAILS5 GET STABLE!!!
-
-gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'master'
-
-gem 'kaminari', github: 'amatsuda/kaminari', branch: '0-17-stable'
+gem 'activeadmin', '1.0.0.pre5'
+gem 'inherited_resources', '~> 1.7' # TEMP activeadmin
 gem 'kaminari-i18n'
 
 

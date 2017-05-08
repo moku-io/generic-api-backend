@@ -57,14 +57,14 @@ namespace :deploy do
   desc 'Create required directories'
   task :make_dirs do
     on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
-      execute "mkdir #{shared_path}/tmp/log -p"
-      execute "mkdir #{shared_path}/public/system -p"
-      execute "mkdir #{shared_path}/public/.well-known -p"
-      execute "mkdir #{shared_path}/db_backups -p"
-      execute "mkdir #{shared_path}/ssl -p"
-      execute "mkdir #{shared_path}/nginx_cache -p"
+      execute :mkdir, "#{shared_path}/tmp/sockets -p"
+      execute :mkdir, "#{shared_path}/tmp/pids -p"
+      execute :mkdir, "#{shared_path}/tmp/log -p"
+      execute :mkdir, "#{shared_path}/public/system -p"
+      execute :mkdir, "#{shared_path}/public/.well-known -p"
+      execute :mkdir, "#{shared_path}/db_backups -p"
+      execute :mkdir, "#{shared_path}/ssl -p"
+      execute :mkdir, "#{shared_path}/nginx_cache -p"
     end
   end
 
@@ -95,7 +95,7 @@ namespace :deploy do
   desc 'Clear cache'
   task :clear_cache do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "rm -R #{shared_path}/nginx_cache/*" rescue nil
+      execute "rm -R #{shared_path}/nginx_cache/*" rescue nil  #TODO execute :rm, '-R' funziona?
     end
   end
 
@@ -121,7 +121,7 @@ namespace :deploy do
       execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list} --email #{fetch(:lets_encrypt_email)} --agree-tos"
 
       # Generate DH parameters for EDH ciphers
-      execute "mkdir #{shared_path}/ssl -p"
+      execute :mkdir, "#{shared_path}/ssl -p"
       execute "openssl dhparam -out #{shared_path}/ssl/dhparams.pem 2048 2> /dev/null"
     end
   end
@@ -136,6 +136,7 @@ namespace :deploy do
   end
 
   namespace :my_delayed_job do
+    # Defining my own monit setup, since capistrano-delayed_job need runit and doen't specifies the ruby version in the delayed_job conf.
     namespace :monit do
       desc 'Configure monit for delayed_job'
       task :config do
@@ -161,6 +162,6 @@ namespace :deploy do
   # after  :finished,     'airbrake:deploy'
 end
 
-after 'deploy:published', 'restart' do  # Temp https://github.com/collectiveidea/delayed_job/issues/881
+after 'deploy:published', 'restart' do
   invoke 'delayed_job:restart'
 end
