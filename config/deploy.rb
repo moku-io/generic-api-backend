@@ -50,7 +50,9 @@ set :delayed_job_roles, [:app, :background]
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/application.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system public/.well-known}
+set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system public/.well-known doc/api}
+
+set :generate_docs, ask('Do you want to generate docs and upload? [Yn]', 'Y')
 
 
 namespace :deploy do
@@ -61,6 +63,7 @@ namespace :deploy do
       execute :mkdir, "#{shared_path}/tmp/pids -p"
       execute :mkdir, "#{shared_path}/tmp/log -p"
       execute :mkdir, "#{shared_path}/public/system -p"
+      execute :mkdir, "#{shared_path}/doc/api -p"
       execute :mkdir, "#{shared_path}/public/.well-known -p"
       execute :mkdir, "#{shared_path}/db_backups -p"
       execute :mkdir, "#{shared_path}/ssl -p"
@@ -96,6 +99,21 @@ namespace :deploy do
   task :clear_cache do
     on roles(:app), in: :sequence, wait: 5 do
       execute "rm -R #{shared_path}/nginx_cache/*" rescue nil  #TODO execute :rm, '-R' funziona?
+    end
+  end
+
+  desc 'Update documentation'
+  task :update_docs do
+    answer = fetch(:generate_docs)
+    if answer.strip.downcase == 'y'
+      # Generate docs (locally)
+      unless system('RAILS_ENV=test rake db:migrate docs:generate:ordered')
+        raise 'Error while generating docs.'
+      end
+
+      on roles(:app), in: :sequence, wait: 5 do
+        upload! 'doc/api', shared_path.join('doc'), recursive: true
+      end
     end
   end
 
@@ -155,6 +173,7 @@ namespace :deploy do
   end
 
   # before :starting,     :check_revision
+  before :starting,     :update_docs
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
