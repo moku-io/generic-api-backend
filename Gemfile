@@ -82,7 +82,7 @@ gem 'cancancan', '~> 1.16.0'
 
 ###
 ## Active Admin and pagination
-gem 'activeadmin', '1.0.0.pre5'
+gem 'activeadmin', '~> 1.0.0'
 gem 'inherited_resources', '~> 1.7' # TEMP activeadmin
 gem 'kaminari-i18n'
 
