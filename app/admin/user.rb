@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  menu :priority => 3
+  menu priority: 3
 
   controller do
     # def create

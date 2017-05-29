@@ -47,8 +47,6 @@ gem 'bullet', group: [:test, :development, :staging]
 # Docs
 gem 'apitome', github: 'modeset/apitome'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 group :development do
   # Use Capistrano for deployment
@@ -76,14 +74,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ## Authentication and Authorization
 gem 'devise', '~> 4.2.1'
 gem 'devise-i18n'
-gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth' #TODO appena sarà rilasciato mettere '~> 0.1.41'
+gem 'devise_token_auth', '~> 0.1.42'
 gem 'cancancan', '~> 1.16.0'
 
 
 ###
 ## Active Admin and pagination
 gem 'activeadmin', '~> 1.0.0'
-gem 'inherited_resources', '~> 1.7' # TEMP activeadmin
 gem 'kaminari-i18n'
 
 

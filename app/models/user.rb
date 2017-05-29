@@ -50,12 +50,5 @@ class User < ApplicationRecord
     end
   end
 
-  # def as_json(options = {})
-  #   super(options.merge(
-  #             # :methods => [...],
-  #             # :only => [...],
-  #             # :include => [...],
-  #             :except => [:created_at, :updated_at]
-  #         ))
-  # end
+
 end

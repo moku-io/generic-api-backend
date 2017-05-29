@@ -87,7 +87,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  config.action_mailer.default_url_options = { :host => 'my-new-app.moku.io' }
+  config.action_mailer.default_url_options = { host: ENV['backend_host'], protocol: ENV['backend_protocol'] }
 
   config.action_mailer.smtp_settings = { :address              => ENV['smtp_address'],
                                          :port                 => ENV['smtp_port'],
