@@ -64,6 +64,9 @@ group :development do
   gem 'spring'
 
   gem 'awesome_print', require: 'ap'
+
+  # Preview emails in browser
+  gem 'letter_opener'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

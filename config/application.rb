@@ -33,10 +33,10 @@ module GenericBackend
                 /http(s)*:\/\/.*\.my-new-app\.production_server\.com/   # Accept subdomains and both http and https
 
         resource '*',
-                 :methods => [:get, :post, :put, :patch, :delete, :options],
-                 :headers => :any, #['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Accept-Encoding', 'Authorization', 'Content-Disposition', 'Client-Version', 'Accept-Language'], # ALL headers must be specified
-                 :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-                 :max_age => 600
+                 methods: [:get, :post, :put, :patch, :delete, :options],
+                 headers: :any, #['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Accept-Encoding', 'Authorization', 'Content-Disposition', 'Client-Version', 'Accept-Language'], # ALL headers must be specified
+                 expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+                 max_age: 600
       end
     end
 

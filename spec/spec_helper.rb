@@ -131,6 +131,6 @@ def stub_auth
   header 'expiry',       10.minutes.from_now.to_i.to_s
 end
 
-shared_context 'authorized', :authorized => true do
+shared_context 'authorized', authorized: true do
   before { stub_auth }
 end

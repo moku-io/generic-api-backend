@@ -80,15 +80,15 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: ENV['backend_host'] || 'my-new-app.moku.io', protocol: ENV['backend_protocol'] || 'http' }
 
-  config.action_mailer.smtp_settings = { :address              => ENV['smtp_address'],
-                                         :port                 => ENV['smtp_port'],
-                                         :domain               => ENV['smtp_domain'],
-                                         :user_name            => ENV['smtp_username'],
-                                         :password             => ENV['smtp_password'],
-                                         :authentication       => ENV['smtp_authentication'],
-                                         :enable_starttls_auto => ENV['smtp_starttls'] == 'true' }
+  config.action_mailer.smtp_settings = { address:               ENV['smtp_address'],
+                                         port:                  ENV['smtp_port'],
+                                         domain:                ENV['smtp_domain'],
+                                         user_name:             ENV['smtp_username'],
+                                         password:              ENV['smtp_password'],
+                                         authentication:        ENV['smtp_authentication'],
+                                         enable_starttls_auto:  ENV['smtp_starttls'] == 'true' }
 
-  ActionMailer::Base.default :from => ENV['smtp_username']
+  ActionMailer::Base.default from:  ENV['smtp_username']
 
   config.paperclip_defaults = {
       storage: :s3,

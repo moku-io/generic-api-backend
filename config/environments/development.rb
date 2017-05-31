@@ -51,17 +51,17 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.default_url_options = { host: ENV['backend_host'] || 'localhost', protocol: ENV['backend_protocol'] || 'http', port: ENV['backend_port'] || 3000 }
+  config.action_mailer.default_url_options = { host: ENV['backend_host'] || 'localhost', protocol: ENV['backend_protocol'] || 'http' }
 
-  config.action_mailer.smtp_settings = { :address              => ENV['smtp_address'],
-                                         :port                 => ENV['smtp_port'],
-                                         :domain               => ENV['smtp_domain'],
-                                         :user_name            => ENV['smtp_username'],
-                                         :password             => ENV['smtp_password'],
-                                         :authentication       => ENV['smtp_authentication'],
-                                         :enable_starttls_auto => ENV['smtp_starttls'] == 'true' }
+  config.action_mailer.smtp_settings = { address:               ENV['smtp_address'],
+                                         port:                  ENV['smtp_port'],
+                                         domain:                ENV['smtp_domain'],
+                                         user_name:             ENV['smtp_username'],
+                                         password:              ENV['smtp_password'],
+                                         authentication:        ENV['smtp_authentication'],
+                                         enable_starttls_auto:  ENV['smtp_starttls'] == 'true' }
 
-  ActionMailer::Base.default :from => ENV['smtp_username']
+  ActionMailer::Base.default from:  ENV['smtp_username']
 
   # config.action_mailer.perform_deliveries = true   ### Uncomment to send email in development.
 

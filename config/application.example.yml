@@ -18,6 +18,10 @@ development:
   db_password: postgres
   db_name: xxxx-development
   s3_bucket: xxxx-development
+  backend_host: localhost:3000
+  backend_protocol: http
+  frontend_host: localhost:3000
+  frontend_protocol: http
 
 test:
   db_host: localhost
@@ -25,6 +29,10 @@ test:
   db_password: postgres
   db_name: xxxx-test
   s3_bucket: xxxx-test
+  backend_host: localhost:3000
+  backend_protocol: http
+  frontend_host: localhost:3000
+  frontend_protocol: http
 
 staging:
   db_host: localhost
@@ -32,6 +40,10 @@ staging:
   db_password: xxxxxxxxxxx
   db_name: xxxx-staging
   s3_bucket: xxxx-staging
+  backend_host: localhost:3000
+  backend_protocol: http
+  frontend_host: localhost:3000
+  frontend_protocol: http
 
 production:
   secret_key_base: 1a26fee9e7c1c50624e29510e89dbe68f01d71f248ee44660ba11f0f97100a450e971a1b092fe84e85135b2074684753d2cf461a8e8ee506cd80f2bc8865d987
@@ -40,3 +52,7 @@ production:
   db_password: xxxxxxxxxxx
   db_name: xxxx-production
   s3_bucket: "xxxx-production"
+  backend_host: localhost:3000
+  backend_protocol: http
+  frontend_host: localhost:3000
+  frontend_protocol: http

@@ -37,7 +37,7 @@ resource 'User' do
   end
 
 
-  # get '/api/patients', :authorized => true do           # Any controller action that need authentication!
+  # get '/api/patients', authorized: true do           # Any controller action that need authentication!
   #   header 'Host', 'my-new-app.moku.io'
   #   header 'Accept', 'application/vnd.my-new-app.v1+json'
   #   header 'Client-Version', 'Web/1.1'
@@ -49,7 +49,7 @@ resource 'User' do
   # end
   #
   #
-  # get '/api/patients', :authorized => true do           # Any controller action that need authentication!
+  # get '/api/patients', authorized: true do           # Any controller action that need authentication!
   #   header 'Host', 'my-new-app.moku.io'
   #   header 'Accept', 'application/vnd.my-new-app.v1+json'
   #   header 'Client-Version', 'Web/1.1'
@@ -65,7 +65,7 @@ resource 'User' do
   # end
 
 
-  delete '/api/auth/sign_out', :authorized => true  do
+  delete '/api/auth/sign_out', authorized: true  do
     header 'Host', 'my-new-app.moku.io'
     header 'Accept', 'application/vnd.my-new-app.v1+json'
     header 'Client-Version', 'Web/1.1'
