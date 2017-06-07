@@ -86,7 +86,9 @@ Rails.application.configure do
                                          user_name:             ENV['smtp_username'],
                                          password:              ENV['smtp_password'],
                                          authentication:        ENV['smtp_authentication'],
-                                         enable_starttls_auto:  ENV['smtp_starttls'] == 'true' }
+                                         enable_starttls_auto:  ENV['smtp_starttls'] == 'true',
+                                         openssl_verify_mode:   ENV['smtp_ssl_verify'],
+                                         ssl:                   ENV['smtp_ssl'] }
 
   ActionMailer::Base.default from:  ENV['smtp_username']
 

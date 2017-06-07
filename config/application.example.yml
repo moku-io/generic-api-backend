@@ -11,6 +11,8 @@ smtp_username: 'xxxx@gmail.com'
 smtp_password: 'xxxx'
 smtp_authentication: 'plain'
 smtp_starttls: 'true'
+smtp_ssl_verify: 'none'
+smtp_ssl: ''
 
 development:
   db_host: localhost
