@@ -105,40 +105,56 @@ Notice: it's strongly suggested to make a revision with git-flow release
 
 
 ## Extra commands
-Restart
+### Restart
 ```sh
 cap <env> deploy:restart
 ```
 
-Restart nginx
+### Restart nginx
 ```sh
 cap <env> nginx:restart
 cap <env> nginx:reload
 ```
 
-List Capistrano tasks
+### List Capistrano tasks
 ```sh
 cap -vT
 ```
 
-Logs:
+### Logs
+Staging:
 ```sh
 ssh deploy@serveraddress.com
 cd ~/apps/appname_production/current/log/
 ```
 
-Console:
+Production
+```sh
+ssh deploy@serveraddress.com
+cd ~/apps/appname_production/current
+```
+
+### Console
+Staging:
+```sh
+ssh deploy@stagingddress.com
+cd ~/apps/appname_staging/current
+RAILS_ENV=staging bundle exec rails c
+```
+
+Production:
 ```sh
 ssh deploy@serveraddress.com
 cd ~/apps/appname_production/current
 RAILS_ENV=production bundle exec rails c
 ```
 
-## Clear delayed jobs queue
+
+### Clear delayed jobs queue
 ```sh
-ssh deploy@serveraddress.com
-cd ~/apps/appname_production/current
-RAILS_ENV=production bundle exec rake jobs:clear
+ssh deploy@stagingddress.com
+cd ~/apps/appname_staging/current
+RAILS_ENV=staging bundle exec rake jobs:clear
 ```
 
 
