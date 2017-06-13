@@ -99,7 +99,7 @@ Rails.application.configure do
                                          openssl_verify_mode:   ENV['smtp_ssl_verify'],
                                          ssl:                   ENV['smtp_ssl'] }
 
-  ActionMailer::Base.default from:  ENV['smtp_username']
+  ActionMailer::Base.default from: ENV['action_mailer_from'] || ENV['smtp_username']
 
   config.paperclip_defaults = {
       storage: :s3,
