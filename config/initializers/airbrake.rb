@@ -1,3 +1,5 @@
+require 'airbrake/delayed_job'
+
 Airbrake.configure do |config|
   config.environment = Rails.env
   config.ignore_environments = %w(development test)
