@@ -1,5 +1,5 @@
 
-json.extract! user, :id, :uid, :provider, :email, :role, :name
+json.extract! user, :id, :uid, :provider, :email, :name
 
 # if user.patient?
 #   json.extract! user, :patient_status, :birth_date

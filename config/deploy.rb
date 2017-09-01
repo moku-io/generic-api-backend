@@ -150,6 +150,8 @@ namespace :deploy do
       set(:nginx_use_ssl, true)
       invoke 'deploy:lets_encrypt'
       invoke 'nginx:site:add'
+      invoke 'nginx:site:enable'
+      invoke 'nginx:reload'
     end
   end
 

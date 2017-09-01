@@ -26,7 +26,7 @@ proxy_cache_path <%= fetch(:deploy_to) %>/shared/nginx_cache levels=1:2 keys_zon
     server {
     listen 80;
     server_name <%= fetch(:nginx_domains).split(' ').first.gsub('www.', '') %>;
-    rewrite ^(.*) https://<%= fetch(:nginx_domains).split(' ').first %>$1 permanent;
+    rewrite ^(.*) http://<%= fetch(:nginx_domains).split(' ').first %>$1 permanent;
     }
 
     <% if fetch(:nginx_use_ssl) %>

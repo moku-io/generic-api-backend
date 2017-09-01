@@ -22,8 +22,7 @@ Deployment stack is the following:
 - auto backups for PostgreSQL;
 - environment variables with [figaro];
 - error notification with [airbrake]﻿;
-- both production and staging environments configured for Capistrano/nginx/puma;
-- configurable exception notification via email ([exception_notification]).
+- both production and staging environments configured for Capistrano/nginx/puma.
 
 
 See wiki article on how setup the server accordingly (TODO).
@@ -40,9 +39,12 @@ See wiki article on how setup the server accordingly (TODO).
 - setup Airbrake
 - edit this README
 
-
-rake db:migrate
-
+And then:
+```sh
+rake db:create db:migrate db:seed
+RAILS_ENV=test rake db:create db:migrate 
+rake docs:generate:ordered
+```
 
 ## Contributing
 
@@ -65,7 +67,6 @@ rake db:migrate
 [Apitome]:https://github.com/modeset/apitome
 [ActiveAdmin]:https://github.com/gregbell/active_admin
 [rack-cors]:https://github.com/cyu/rack-cors
-[exception_notification]:https://github.com/smartinez87/exception_notification
 [whenever]:https://github.com/javan/whenever
 [delayed-job]:https://github.com/collectiveidea/delayed_job
 [Figaro]:https://github.com/laserlemon/figaro

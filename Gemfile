@@ -57,6 +57,7 @@ group :development do
   gem 'capistrano3-nginx', '2.0.2', require: false
   gem 'capistrano3-puma', '1.1.0',  require: false
   gem 'capistrano3-delayed-job',    require: false
+  gem 'capistrano-bundle_audit',    require: false
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 3.0'
@@ -92,7 +93,7 @@ gem 'kaminari-i18n'
 ## Utility
 gem 'rack-cors'
 
-gem 'whenever', github: 'javan/whenever'
+gem 'versioncake'
 
 gem 'airbrake', '6.1.0'
 gem 'airbrake-ruby', '2.2.4'
