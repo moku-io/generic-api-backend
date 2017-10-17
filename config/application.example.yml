@@ -27,8 +27,8 @@ development:
 
 test:
   db_host: localhost
-  db_username: postgres
-  db_password: postgres
+  db_username: jenkins
+  db_password: jenkins
   db_name: xxxx-test
   s3_bucket: xxxx-test
   backend_host: localhost:3000

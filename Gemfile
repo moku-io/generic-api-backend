@@ -39,6 +39,15 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop', require: false
   gem 'simplecov', require: false
+
+  gem 'ci_reporter'
+  gem 'ci_reporter_rspec'
+  gem "brakeman", :require => false
+  gem 'rubocop'
+  gem 'rubocop-checkstyle_formatter', require: false
+  gem 'yard'
+  gem 'redcarpet'   # for yard to process .md files
+
 end
 
 # Optimizing N+1 queries
