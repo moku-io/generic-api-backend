@@ -158,6 +158,12 @@ cd ~/apps/appname_staging/current
 RAILS_ENV=staging bundle exec rake jobs:clear
 ```
 
+### Rubocop
+
+To run rubocop: `$rubocop --auto-gen-config`
+A .rubocop_todo.yml will be created.
+
+if you want to autocorrect results: `$rubocop --auto-correct`
 
 # Frontend
 
@@ -173,3 +179,5 @@ RAILS_ENV=staging bundle exec rake jobs:clear
 
 [Password reset flow]: https://github.com/lynndylanhurley/ng-token-auth#password-reset-flow
 [POST /api/auth/password]: http://localhost:3017/docs/user/password_reset
+
+
