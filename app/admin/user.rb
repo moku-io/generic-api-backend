@@ -19,14 +19,12 @@ ActiveAdmin.register User do
     end
   end
 
-
   permit_params :email, :password, :password_confirmation
 
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
-
 
   index do
     selectable_column
@@ -38,14 +36,12 @@ ActiveAdmin.register User do
     actions
   end
 
-
   show do
     attributes_table :email, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :created_at, :updated_at
   end
 
-
   form do |f|
-    f.inputs "Details" do
+    f.inputs 'Details' do
       f.input :email
       f.input :password
       f.input :password_confirmation

@@ -1,3 +1,4 @@
+# ApiController
 class ApiController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
   protect_from_forgery with: :null_session
@@ -5,14 +6,13 @@ class ApiController < ActionController::Base
   before_action :set_locale
   before_action :set_client_info
 
-
   private
+
+  #pay attention to ABC (https://en.wikipedia.org/wiki/ABC_Software_Metric)
   def set_locale
-    begin
-      I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first unless request.env['HTTP_ACCEPT_LANGUAGE'].nil?
-    rescue
-      logger.error 'Invalid locale. HTTP_ACCEPT_LANGUAGE = ' + request.env['HTTP_ACCEPT_LANGUAGE'].to_s
-    end
+    I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first unless request.env['HTTP_ACCEPT_LANGUAGE'].nil?
+  rescue
+    logger.error 'Invalid locale. HTTP_ACCEPT_LANGUAGE = ' + request.env['HTTP_ACCEPT_LANGUAGE'].to_s
   end
 
   def set_client_info
