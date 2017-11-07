@@ -2,7 +2,7 @@
 lock '3.4.0'
 set :rvm_ruby_version, '2.3.3'
 
-set :application,   "xxxx_#{fetch(:stage)}"
+set :application, "xxxx_#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxxx/xxxx.git'
 
 # Default branch is 'develop'
@@ -11,7 +11,6 @@ set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "develop"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
 
 # Don't change these unless you know what you're doing
 set :user, 'deploy'
@@ -38,7 +37,7 @@ set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
 # Delayed jobs
 set :delayed_job_workers, 1
 set :delayed_job_queues, []
-set :delayed_job_roles, [:app, :background]
+set :delayed_job_roles, %i[app background]
 
 ## Defaults:
 # set :scm,           :git
@@ -53,7 +52,6 @@ set :linked_files, %w{config/application.yml}
 set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system public/.well-known doc/api}
 
 set :generate_docs, ask('Do you want to generate docs and upload? [Yn]', 'Y')
-
 
 namespace :deploy do
   desc 'Create required directories'
@@ -98,14 +96,18 @@ namespace :deploy do
   desc 'Clear cache'
   task :clear_cache do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "rm -R #{shared_path}/nginx_cache/*" rescue nil  #TODO execute :rm, '-R' funziona?
+      begin
+        execute "rm -R #{shared_path}/nginx_cache/*"
+      rescue
+        nil
+      end # TODO execute :rm, '-R' funziona?
     end
   end
 
   desc 'Update documentation'
   task :update_docs do
     answer = fetch(:generate_docs)
-    if answer.strip.downcase == 'y'
+    if answer.strip.casecmp('y').zero?
       # Generate docs (locally)
       unless system('RAILS_ENV=test rake db:migrate docs:generate:ordered')
         raise 'Error while generating docs.'
@@ -123,7 +125,11 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :rake, 'db:create' rescue nil
+          begin
+            execute :rake, 'db:create'
+          rescue
+            nil
+          end
         end
       end
     end
@@ -135,7 +141,7 @@ namespace :deploy do
       # Run letsencrypt to generate the certs
       # Prerequisites:
       #    sudo apt-get install letsencrypt
-      domains_list = fetch(:lets_encrypt_domains).split(' ').collect{|d| "-d #{d}"}.join(' ')
+      domains_list = fetch(:lets_encrypt_domains).split(' ').collect{ |d| "-d #{d}" }.join(' ')
       execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list} --email #{fetch(:lets_encrypt_email)} --agree-tos"
 
       # Generate DH parameters for EDH ciphers

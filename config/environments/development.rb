@@ -67,7 +67,6 @@ Rails.application.configure do
 
   # config.action_mailer.perform_deliveries = true   ### Uncomment to send email in development.
 
-
   # Bullet for optimizing N+1 queries
   config.after_initialize do
     Bullet.enable = true

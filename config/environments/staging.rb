@@ -77,7 +77,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-
   config.action_mailer.default_url_options = { host: ENV['backend_host'] || 'my-new-app.moku.io', protocol: ENV['backend_protocol'] || 'http' }
 
   config.action_mailer.smtp_settings = { address:               ENV['smtp_address'],
@@ -93,13 +92,13 @@ Rails.application.configure do
   ActionMailer::Base.default from: ENV['action_mailer_from'] || ENV['smtp_username']
 
   config.paperclip_defaults = {
-      storage: :s3,
-      s3_region: ENV['aws_region'],
-      s3_credentials: {
-          bucket: ENV['s3_bucket'],
-          access_key_id: ENV['aws_access_key_id'],
-          secret_access_key: ENV['aws_secret_access_key']
-      }
+    storage: :s3,
+    s3_region: ENV['aws_region'],
+    s3_credentials: {
+      bucket: ENV['s3_bucket'],
+      access_key_id: ENV['aws_access_key_id'],
+      secret_access_key: ENV['aws_secret_access_key']
+    }
   }
 
   # Bullet for optimizing N+1 queries

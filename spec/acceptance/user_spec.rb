@@ -13,10 +13,9 @@ resource 'User' do
                  confirm_success_url: 'http://my-new-app.moku.io/')
 
       expect(status).to eq(200)
-      expect(User.find_by uid: 'new_user@domain.com').not_to be_nil
+      expect(User.find_by(uid: 'new_user@domain.com')).not_to be_nil
     end
   end
-
 
   post '/api/auth/sign_in' do
     header 'Host', 'my-new-app.moku.io'
@@ -35,7 +34,6 @@ resource 'User' do
       expect(status).to eq(401)
     end
   end
-
 
   # get '/api/patients', authorized: true do           # Any controller action that need authentication!
   #   header 'Host', 'my-new-app.moku.io'
@@ -64,8 +62,7 @@ resource 'User' do
   #   end
   # end
 
-
-  delete '/api/auth/sign_out', authorized: true  do
+  delete '/api/auth/sign_out', authorized: true do
     header 'Host', 'my-new-app.moku.io'
     header 'Accept', 'application/vnd.my-new-app.v1+json'
     header 'Client-Version', 'Web/1.1'

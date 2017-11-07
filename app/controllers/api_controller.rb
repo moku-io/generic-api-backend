@@ -8,7 +8,7 @@ class ApiController < ActionController::Base
 
   private
 
-  #pay attention to ABC (https://en.wikipedia.org/wiki/ABC_Software_Metric)
+  # pay attention to ABC (https://en.wikipedia.org/wiki/ABC_Software_Metric)
   def set_locale
     I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first unless request.env['HTTP_ACCEPT_LANGUAGE'].nil?
   rescue

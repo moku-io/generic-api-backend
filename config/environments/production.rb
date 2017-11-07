@@ -49,7 +49,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -86,7 +86,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-
   config.action_mailer.default_url_options = { host: ENV['backend_host'], protocol: ENV['backend_protocol'] }
 
   config.action_mailer.smtp_settings = { address:               ENV['smtp_address'],
@@ -102,13 +101,12 @@ Rails.application.configure do
   ActionMailer::Base.default from: ENV['action_mailer_from'] || ENV['smtp_username']
 
   config.paperclip_defaults = {
-      storage: :s3,
-      s3_region: ENV['aws_region'],
-      s3_credentials: {
-          bucket: ENV['s3_bucket'],
-          access_key_id: ENV['aws_access_key_id'],
-          secret_access_key: ENV['aws_secret_access_key']
-      }
+    storage: :s3,
+    s3_region: ENV['aws_region'],
+    s3_credentials: {
+      bucket: ENV['s3_bucket'],
+      access_key_id: ENV['aws_access_key_id'],
+      secret_access_key: ENV['aws_secret_access_key']
+    }
   }
-
 end

@@ -15,7 +15,7 @@ Rails.application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-      'Cache-Control' => 'public, max-age=3600'
+    'Cache-Control' => 'public, max-age=3600'
   }
 
   # Show full error reports and disable caching.
@@ -43,8 +43,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV['backend_host'], protocol: ENV['backend_protocol'] }
 
   config.paperclip_defaults = {
-      path: ':rails_root/tmp/test_uploads/:class/:id/:attachment/:filename.:extension',
-      url:  ':rails_root/tmp/test_uploads/:class/:id/:attachment/:filename.:extension'
+    path: ':rails_root/tmp/test_uploads/:class/:id/:attachment/:filename.:extension',
+    url:  ':rails_root/tmp/test_uploads/:class/:id/:attachment/:filename.:extension'
   }
 
   # Bullet for optimizing N+1 queries

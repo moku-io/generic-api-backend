@@ -8,7 +8,6 @@
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
 
-
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the
@@ -32,7 +31,6 @@ set :puma_workers, 1
 # - One worker per core
 # - Threads to be determined in connection with RAM availability and application and
 # - Threads = Connection Pool (database)
-
 
 # Custom SSH Options
 # ==================

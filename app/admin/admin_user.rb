@@ -12,7 +12,6 @@ ActiveAdmin.register AdminUser do
     end
   end
 
-
   index do
     selectable_column
     id_column
@@ -36,5 +35,4 @@ ActiveAdmin.register AdminUser do
     end
     f.actions
   end
-
 end

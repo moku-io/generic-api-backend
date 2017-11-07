@@ -1,7 +1,7 @@
 # Load test coverage gem.
 require 'simplecov'
 SimpleCov.start 'rails' do
-  add_filter 'app/admin'  #will reject all admin content
+  add_filter 'app/admin' # will reject all admin content
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
@@ -80,13 +80,12 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-
   config.before(:all) do
-      FileUtils.mkdir_p "#{Rails.root}/tmp/test_uploads"
+    FileUtils.mkdir_p "#{Rails.root}/tmp/test_uploads"
   end
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation#, {:except => %w()}
+    DatabaseCleaner.strategy = :truncation # , {:except => %w()}
     DatabaseCleaner.clean_with(:truncation)
   end
 
@@ -110,7 +109,6 @@ RSpec.configure do |config|
   end
 end
 
-
 RspecApiDocumentation.configure do |config|
   config.format = :json
   config.api_name = 'GenericBackend API'
@@ -119,7 +117,6 @@ RspecApiDocumentation.configure do |config|
   config.docs_dir = Rails.root.join('doc', 'api')
   config.keep_source_order = true
 end
-
 
 def stub_auth
   @new_token = @user.create_new_auth_token

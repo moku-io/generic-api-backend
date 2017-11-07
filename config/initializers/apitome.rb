@@ -2,7 +2,7 @@ Apitome.setup do |config|
   # This determines where the Apitome routes will be mounted. Changing this to '/api/documentation' for instance would
   # allow you to browse to http://localhost:3000/api/documentation to see your api documentation. Set to nil and mount
   # it yourself if you need to.
-  config.mount_at = nil  # Disabled as docs are only shown to authenticated admin_users
+  config.mount_at = nil # Disabled as docs are only shown to authenticated admin_users
 
   # This defaults to Rails.root if left nil. If you're providing documentation for an engine using a dummy application
   # it can be useful to set this to your engines root.. E.g. Application::Engine.root
@@ -42,7 +42,7 @@ Apitome.setup do |config|
 
   # You can specify how urls are formatted using a Proc or other callable object.
   # Your proc will be called with a resource name or link, giving you the opportunity to modify it as necessary for in the documentation url.
-  config.url_formatter = -> (str) { str.gsub(/\.json$/, '').underscore.gsub(/[^0-9a-z\:]+/i, '-') }
+  config.url_formatter = ->(str) { str.gsub(/\.json$/, '').underscore.gsub(/[^0-9a-z\:]+/i, '-') }
 
   # You can setup the docs to be loaded from a remote URL if they are
   # not available in the application environment. This defaults to
