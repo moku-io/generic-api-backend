@@ -34,7 +34,9 @@
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #
 
-# class User
+##
+# This class define the user module
+
 class User < ApplicationRecord
   # Include default devise modules. Now disabled: :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -42,7 +44,9 @@ class User < ApplicationRecord
   # The following row must be after devise config, never before.
   include DeviseTokenAuth::Concerns::User
 
-  # Sarbanes-Oxley Compliance: http://en.wikipedia.org/wiki/Sarbanes%E2%80%93Oxley_Act
+  # Add an error if password complexity is not compliant to Sarbanes-Oxley rules
+  # (http://en.wikipedia.org/wiki/Sarbanes%E2%80%93Oxley_Act)
+  #
   def password_complexity
     if password.present? && !password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W]).+/)
       errors.add :password, "must include at least one of each: lowercase letter, uppercase letter, numeric digit, special character."

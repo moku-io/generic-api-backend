@@ -181,3 +181,12 @@ if you want to autocorrect results: `$rubocop --auto-correct`
 [POST /api/auth/password]: http://localhost:3017/docs/user/password_reset
 
 
+# Documentation
+
+look at http://www.rubydoc.info/gems/yard/file/docs/GettingStarted.md for syntax rules compliant to yard.
+
+use `yard doc` for compile the doc.
+use `yard server` to start a server, by default it runs on `localhost:8808`
+
+list all undocumented objects and their file locations: `yard stats --list-undoc`
+
