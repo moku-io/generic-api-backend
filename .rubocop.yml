@@ -1,6 +1,11 @@
 # Relaxed.Ruby.Style
 ## Version 2.1
 
+AllCops:
+  Excludes:
+    - bin/*
+    - db/schema.rb
+
 Style/Alias:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylealias
