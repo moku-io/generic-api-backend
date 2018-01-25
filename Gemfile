@@ -100,7 +100,7 @@ gem 'airbrake-ruby', '2.2.4'
 
 gem 'figaro'
 
-gem 'paperclip'
+gem 'paperclip', '>= 5.2.0'
 # gem 'aws-sdk', '>= 2.0'
 
 gem 'delayed_job_active_record'
