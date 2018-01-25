@@ -32,7 +32,7 @@ gem 'puma', group: [:production, :staging]
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5.0'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation'
   gem 'annotate'

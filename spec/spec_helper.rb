@@ -92,7 +92,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
 
     # allow_any_instance_of(Share).to receive(:is_mounted?) { true }
     # allow_any_instance_of(Share).to receive(:mount_dir) { File.expand_path('tmp/share_mock') }

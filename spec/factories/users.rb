@@ -34,9 +34,9 @@
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:uid) {|n| "user_#{n}@test.com"}
     sequence(:email) {|n| "user_#{n}@test.com"}
