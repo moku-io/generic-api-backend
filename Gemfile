@@ -34,7 +34,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.0'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
-  gem 'rspec_api_documentation', github: 'zipmark/rspec_api_documentation'
+  gem 'rspec_api_documentation'
   gem 'annotate'
   gem 'faker'
   gem 'rubocop', require: false
@@ -84,7 +84,7 @@ gem 'cancancan', '~> 1.16.0'
 
 ###
 ## Active Admin and pagination
-gem 'activeadmin', '~> 1.0.0'
+gem 'activeadmin'
 gem 'kaminari-i18n'
 
 
@@ -104,5 +104,5 @@ gem 'paperclip', '>= 5.2.0'
 # gem 'aws-sdk', '>= 2.0'
 
 gem 'delayed_job_active_record'
-gem 'delayed_job', github: 'collectiveidea/delayed_job'  # TEMP rails 5
+gem 'delayed_job'
 gem 'daemons' # Needed by delayed_job
