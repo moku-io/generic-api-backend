@@ -136,7 +136,7 @@ namespace :deploy do
       # Prerequisites:
       #    sudo apt-get install letsencrypt
       domains_list = fetch(:lets_encrypt_domains).split(' ').collect{|d| "-d #{d}"}.join(' ')
-      execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list} --email #{fetch(:lets_encrypt_email)} --agree-tos"
+      execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list} --email #{fetch(:lets_encrypt_email)} --agree-tos -n"
 
       # Generate DH parameters for EDH ciphers
       execute :mkdir, "#{shared_path}/ssl -p"

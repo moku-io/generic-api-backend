@@ -125,14 +125,14 @@ cap -vT
 ### Logs
 Staging:
 ```sh
-ssh deploy@serveraddress.com
-cd ~/apps/appname_production/current/log/
+ssh deploy@stagingddress.com
+cd ~/apps/appname_staging/current/log/
 ```
 
 Production
 ```sh
 ssh deploy@serveraddress.com
-cd ~/apps/appname_production/current
+cd ~/apps/appname_production/current/log/
 ```
 
 ### Console
