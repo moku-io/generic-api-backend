@@ -2,9 +2,8 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 5.0.0', '< 5.1'
-gem 'rack', '~> 2.0.1'
-gem 'rails-i18n', '~> 5.0.1'
+gem 'rails', '>= 5.1', '< 5.2'
+gem 'rails-i18n', '~> 5.1.1'
 
 gem 'pg'
 
@@ -13,7 +12,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
 
@@ -31,7 +30,7 @@ gem 'puma', group: [:production, :staging]
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.5.0'
+  gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'rspec_api_documentation'
@@ -45,7 +44,7 @@ end
 gem 'bullet', group: [:test, :development, :staging]
 
 # Docs
-gem 'apitome', github: 'modeset/apitome'
+gem 'apitome', github: 'jejacks0n/apitome'
 
 
 group :development do
@@ -76,10 +75,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 ###
 ## Authentication and Authorization
-gem 'devise', '~> 4.2.1'
+gem 'devise'
 gem 'devise-i18n'
-gem 'devise_token_auth', '~> 0.1.42'
-gem 'cancancan', '~> 1.16.0'
+gem 'devise_token_auth', '~> 0.1.43'
+gem 'cancancan'
 
 
 ###
@@ -95,12 +94,12 @@ gem 'rack-cors'
 
 gem 'versioncake'
 
-gem 'airbrake', '6.1.0'
-gem 'airbrake-ruby', '2.2.4'
+gem 'airbrake', '7.0.3'
+gem 'airbrake-ruby', '2.4.2'
 
 gem 'figaro'
 
-gem 'paperclip', '>= 5.2.0'
+gem 'paperclip'
 # gem 'aws-sdk', '>= 2.0'
 
 gem 'delayed_job_active_record'
