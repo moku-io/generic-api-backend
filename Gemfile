@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.0'
 # Action Cable dependencies for the Redis adapter
 gem 'redis', '~> 3.0'
 
+gem 'listen'
+
 gem 'puma', group: [:production, :staging]
 
 
