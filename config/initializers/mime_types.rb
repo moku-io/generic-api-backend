@@ -3,5 +3,4 @@
 # Add new mime types for use in respond_to blocks:
 # Mime::Type.register "text/richtext", :rtf
 
-
 Mime::Type.register 'application/vnd.my-new-app.v1+json', :json_v1         #http://pivotallabs.com/api-versioning/
