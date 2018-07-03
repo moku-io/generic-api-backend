@@ -44,7 +44,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :host), protocol: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :protocol) }
+  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :host) || 'localhost', protocol: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :protocol) || 'http' }
 
   config.paperclip_defaults = {
       path: ':rails_root/tmp/test_uploads/:class/:id/:attachment/:filename.:extension',

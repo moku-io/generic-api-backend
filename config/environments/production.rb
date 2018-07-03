@@ -93,7 +93,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :host), protocol: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :protocol) }
+  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :host) || 'my-new-app.moku.io', protocol: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :protocol) || 'http' }
 
   config.action_mailer.smtp_settings = { address:               Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :address),
                                          port:                  Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :port),
