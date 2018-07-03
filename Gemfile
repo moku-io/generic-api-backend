@@ -97,16 +97,13 @@ gem 'cancancan'
 gem 'activeadmin'
 gem 'kaminari-i18n'
 
-
 ## Utility
 gem 'rack-cors'
 gem 'versioncake'
+# gem 'aws-sdk-s3', require: false
 
 gem 'airbrake', '7.0.3'
 gem 'airbrake-ruby', '2.4.2'
-
-gem 'paperclip'
-# gem 'aws-sdk', '>= 2.0'
 
 gem 'delayed_job_active_record'
 gem 'delayed_job'

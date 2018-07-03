@@ -49,7 +49,7 @@ set :delayed_job_roles, [:app, :background]
 
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/master.key}
-set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system public/.well-known doc/api}
+set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets storage public/.well-known doc/api}
 
 set :generate_docs, ask('Do you want to generate docs and upload? [Yn]', 'Y')
 
@@ -61,7 +61,7 @@ namespace :deploy do
       execute :mkdir, "#{shared_path}/tmp/sockets -p"
       execute :mkdir, "#{shared_path}/tmp/pids -p"
       execute :mkdir, "#{shared_path}/tmp/log -p"
-      execute :mkdir, "#{shared_path}/public/system -p"
+      execute :mkdir, "#{shared_path}/storage -p"
       execute :mkdir, "#{shared_path}/doc/api -p"
       execute :mkdir, "#{shared_path}/public/.well-known -p"
       execute :mkdir, "#{shared_path}/db_backups -p"

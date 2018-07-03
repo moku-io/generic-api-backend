@@ -39,7 +39,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :local
+  config.active_storage.service = :local # :amazon
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -106,15 +106,5 @@ Rails.application.configure do
                                          ssl:                   Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl) }
 
   ActionMailer::Base.default from: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :action_mailer_from) || Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username)
-
-  config.paperclip_defaults = {
-      storage: :s3,
-      s3_region: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :region),
-      s3_credentials: {
-          bucket: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :s3_bucket),
-          access_key_id: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :access_key_id),
-          secret_access_key: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :secret_access_key)
-      }
-  }
 
 end
