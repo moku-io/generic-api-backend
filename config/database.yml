@@ -1,10 +1,10 @@
 development: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV['db_host'] || 'localhost' %>
-  username: <%= ENV['db_username'] || 'postgres' %>
-  password: <%= ENV['db_password'] || 'postgres' %>
-  database: <%= ENV['db_name'] || 'xxxx-development' %>
+  host: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :host) || 'localhost' %>
+  username: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :username) || 'postgres' %>
+  password: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :password) || 'postgres' %>
+  database: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :name) || 'xxxx-development' %>
   pool: 5
   timeout: 5000
 
@@ -13,11 +13,13 @@ development: &default
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= ENV['db_name'] || 'xxxx-test' %>
+  database: <%= Rails.application.credentials.dig(:test, :db, :name) || 'xxxx-test' %>
 
 staging:
   <<: *default
+  database: <%= Rails.application.credentials.dig(:staging, :db, :name) || 'xxxx-staging' %>
 
 production:
   <<: *default
+  database: <%= Rails.application.credentials.dig(:production, :db, :name) || 'xxxx-production' %>
   pool: 16

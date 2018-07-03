@@ -78,27 +78,27 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  config.action_mailer.default_url_options = { host: ENV['backend_host'] || 'my-new-app.moku.io', protocol: ENV['backend_protocol'] || 'http' }
+  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :host) || 'my-new-app.moku.io', protocol: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :protocol) || 'http' }
 
-  config.action_mailer.smtp_settings = { address:               ENV['smtp_address'],
-                                         port:                  ENV['smtp_port'],
-                                         domain:                ENV['smtp_domain'],
-                                         user_name:             ENV['smtp_username'],
-                                         password:              ENV['smtp_password'],
-                                         authentication:        ENV['smtp_authentication'],
-                                         enable_starttls_auto:  ENV['smtp_starttls'] == 'true',
-                                         openssl_verify_mode:   ENV['smtp_ssl_verify'],
-                                         ssl:                   ENV['smtp_ssl'] }
+  config.action_mailer.smtp_settings = { address:               Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :address),
+                                         port:                  Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :port),
+                                         domain:                Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :domain),
+                                         user_name:             Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username),
+                                         password:              Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :password),
+                                         authentication:        Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :authentication),
+                                         enable_starttls_auto:  Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :starttls),
+                                         openssl_verify_mode:   Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl_verify),
+                                         ssl:                   Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl) }
 
-  ActionMailer::Base.default from: ENV['action_mailer_from'] || ENV['smtp_username']
+  ActionMailer::Base.default from: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :action_mailer_from) || Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username)
 
   config.paperclip_defaults = {
       storage: :s3,
-      s3_region: ENV['aws_region'],
+      s3_region: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :region),
       s3_credentials: {
-          bucket: ENV['s3_bucket'],
-          access_key_id: ENV['aws_access_key_id'],
-          secret_access_key: ENV['aws_secret_access_key']
+          bucket: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :s3_bucket),
+          access_key_id: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :access_key_id),
+          secret_access_key: Rails.application.credentials.dig(Rails.env.to_sym, :aws, :secret_access_key)
       }
   }
 

@@ -105,8 +105,6 @@ gem 'versioncake'
 gem 'airbrake', '7.0.3'
 gem 'airbrake-ruby', '2.4.2'
 
-gem 'figaro'
-
 gem 'paperclip'
 # gem 'aws-sdk', '>= 2.0'
 

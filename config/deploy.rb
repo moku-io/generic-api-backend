@@ -48,8 +48,7 @@ set :delayed_job_roles, [:app, :background]
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_files, %w{config/application.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/master.key}
 set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets public/system public/.well-known doc/api}
 
 set :generate_docs, ask('Do you want to generate docs and upload? [Yn]', 'Y')

@@ -30,3 +30,5 @@ db/schema.rb
 /public/system/
 /public/assets/
 doc/api/
+# Ignore master key for decrypting credentials and more.
+/config/master.key

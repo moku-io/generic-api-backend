@@ -152,8 +152,6 @@ GEM
     faker (1.8.7)
       i18n (>= 0.7)
     ffi (1.9.25)
-    figaro (1.1.1)
-      thor (~> 0.14)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
@@ -418,7 +416,6 @@ DEPENDENCIES
   devise_token_auth (~> 0.1.43)
   factory_bot_rails
   faker
-  figaro
   jbuilder (~> 2.5)
   kaminari-i18n
   letter_opener
