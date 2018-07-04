@@ -12,5 +12,5 @@ if Rails.env.production?
 end
 
 every 1.day, at: '4:00 am' do
-  command 'sleep $[ ( $RANDOM / 1000 )  + 1 ]s && sudo letsencrypt renew && sleep 30 && sudo service nginx reload'
+  command 'sleep $[ ( $RANDOM / 1000 )  + 1 ]s; sudo letsencrypt renew; sleep 30; sudo service nginx reload'
 end
