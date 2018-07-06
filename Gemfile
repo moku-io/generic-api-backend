@@ -102,8 +102,8 @@ gem 'rack-cors'
 gem 'versioncake'
 # gem 'aws-sdk-s3', require: false
 
-gem 'airbrake', '7.0.3'
-gem 'airbrake-ruby', '2.4.2'
+gem 'airbrake', '7.3.0'
+gem 'airbrake-ruby', '2.5.0'
 
 gem 'delayed_job_active_record'
 gem 'delayed_job'

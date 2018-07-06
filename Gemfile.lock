@@ -64,9 +64,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (7.0.3)
-      airbrake-ruby (~> 2.4)
-    airbrake-ruby (2.4.2)
+    airbrake (7.3.0)
+      airbrake-ruby (~> 2.5)
+    airbrake-ruby (2.5.0)
     annotate (2.7.4)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
@@ -211,8 +211,8 @@ GEM
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
-    mini_racer (0.1.15)
-      libv8 (~> 6.3)
+    mini_racer (0.2.0)
+      libv8 (>= 6.3)
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_json (1.13.1)
@@ -221,7 +221,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (5.0.2)
     nio4r (2.3.1)
-    nokogiri (1.8.3)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     parallel (1.12.1)
@@ -352,7 +352,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.13)
+    uglifier (4.1.14)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
     uniform_notifier (1.11.0)
@@ -377,8 +377,8 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
-  airbrake (= 7.0.3)
-  airbrake-ruby (= 2.4.2)
+  airbrake (= 7.3.0)
+  airbrake-ruby (= 2.5.0)
   annotate
   apitome!
   awesome_print
