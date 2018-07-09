@@ -8,3 +8,12 @@ Airbrake.configure do |config|
   config.project_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
   config.host        = 'https://errors.moku.io'
 end
+
+# Example of a filtered exception.
+# Airbrake.add_filter do |notice|
+#   # The library supports nested exceptions, so one notice can carry several
+#   # exceptions.
+#   if notice[:errors].any? { |error| error[:type] == 'Net::ReadTimeout' }
+#     notice.ignore!
+#   end
+# end

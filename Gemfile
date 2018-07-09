@@ -90,7 +90,7 @@ gem 'apitome', github: 'jejacks0n/apitome'
 ## Authentication and Authorization
 gem 'devise'
 gem 'devise-i18n'
-gem 'devise_token_auth', '~> 0.1.43'
+gem 'devise_token_auth', '~> 0.1.43'  #TODO need an upgrade asap https://github.com/lynndylanhurley/devise_token_auth/issues/10792
 gem 'cancancan'
 
 ## Active Admin and pagination
@@ -102,9 +102,10 @@ gem 'rack-cors'
 gem 'versioncake'
 # gem 'aws-sdk-s3', require: false
 
-gem 'airbrake', '7.3.0'
-gem 'airbrake-ruby', '2.5.0'
-
 gem 'delayed_job_active_record'
 gem 'delayed_job'
 gem 'daemons' # Needed by delayed_job
+
+# Airbrake is best to be loaded after all other gems - https://github.com/airbrake/airbrake/issues/826
+gem 'airbrake', '7.3.0'
+gem 'airbrake-ruby', '2.5.0'
