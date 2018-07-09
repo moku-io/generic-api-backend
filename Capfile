@@ -23,7 +23,7 @@ require 'capistrano/puma'
 require 'capistrano/puma/monit'
 require 'capistrano/delayed_job'
 require 'whenever/capistrano'
-require 'airbrake/capistrano/tasks'
+require 'airbrake/capistrano'
 require 'capistrano/bundle_audit'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.

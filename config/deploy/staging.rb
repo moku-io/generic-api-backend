@@ -34,6 +34,22 @@ set :puma_workers, 1
 # - Threads = Connection Pool (database)
 
 
+# SSL settings
+set :nginx_use_ssl, true
+
+set :lets_encrypt_domains, 'my-new-app.moku.io www.my-new-app.moku.io'
+set :lets_encrypt_email, 'info@moku.io'
+
+set :nginx_ssl_certificate, 'fullchain.pem'
+set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
+set :nginx_ssl_certificate_key, 'privkey.pem'
+set :nginx_ssl_certificate_key_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
+set :nginx_ssl_certificate_ca, 'chain.pem'  # As nginx_ssl_certificate bundle, but without the first one (this domain); https://www.digitalocean.com/community/tutorials/how-to-configure-ocsp-stapling-on-apache-and-nginx
+set :nginx_ssl_certificate_ca_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
+set :nginx_dhparam, 'dhparams.pem'
+set :nginx_dhparam_path, "#{shared_path}/ssl"
+
+
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
