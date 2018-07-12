@@ -101,6 +101,7 @@ gem 'kaminari-i18n'
 gem 'rack-cors'
 gem 'versioncake'
 gem 'whenever'
+# gem 'traco'   # Translations
 # gem 'aws-sdk-s3', require: false
 
 gem 'delayed_job_active_record'
