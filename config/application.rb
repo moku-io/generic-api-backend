@@ -25,6 +25,7 @@ module GenericBackend
         origins /http:\/\/localhost(:\d+)?/,
                 /http:\/\/127\.0\.0\.1(:\d+)?/,
                 /http:\/\/10\.1\.60\.*(:\d+)?/,
+                /http(s)*:\/\/.*\.moku\.io/,
                 /http(s)*:\/\/.*\..*\.moku\.io/,
                 /http(s)*:\/\/.*\.ngrok\.io/,
                 /http(s)*:\/\/.*\.my-new-app\.production_server\.com/   # Accept subdomains and both http and https
