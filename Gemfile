@@ -85,7 +85,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bullet', group: [:test, :development, :staging]
 
 # Docs
-gem 'apitome', github: 'jejacks0n/apitome'
+gem 'apitome', '~> 0.2.0'
 
 ## Authentication and Authorization
 gem 'devise'
@@ -101,6 +101,7 @@ gem 'kaminari-i18n'
 gem 'rack-cors'
 gem 'versioncake'
 gem 'whenever'
+# gem 'active_record_query_trace' # Trace who generates SQL queries.
 # gem 'traco'   # Translations
 # gem 'aws-sdk-s3', require: false
 

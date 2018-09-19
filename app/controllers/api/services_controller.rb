@@ -1,5 +1,3 @@
-#TODO converti a jbuilder
-
 # class API::ServicesController < ApiController
 #   before_action :authenticate_user!
 #   #TODO verifica che il role sia abilitato a questo controller
@@ -8,23 +6,29 @@
 #
 #
 #   def index
-#     @services = Service.all
+#     @services = Service.all.includes(:tools)
 #
 #     if stale?(@services)
-#       render json: { services: @services }
+#       respond_to do |format|
+#         format.json { render :index }
+#       end
 #     end
 #   end
 #
 #   def show
 #     if stale?(@service)
-#       render json: { service: @service }
+#       respond_to do |format|
+#         format.json { render :show }
+#       end
 #     end
 #   end
 #
 #   def create
 #     @service = Service.create(service_params)
 #     if @service
-#       render json: { service: @service }
+#       respond_to do |format|
+#         format.json { render :show }
+#       end
 #     else
 #       render json: @service.errors, status: :unprocessable_entity
 #     end
@@ -32,7 +36,9 @@
 #
 #   def update
 #     if @service.update service_params
-#       render json: { service: @service }
+#       respond_to do |format|
+#         format.json { render :show }
+#       end
 #     else
 #       render json: @service.errors, status: :unprocessable_entity
 #     end
@@ -40,7 +46,9 @@
 #
 #   def destroy
 #     @service.destroy!
-#     render json: { service: @service }
+#       respond_to do |format|
+#         format.json { render :show }
+#       end
 #   end
 #
 #

@@ -21,9 +21,13 @@ server 'my-new-app.moku.io', user: 'deploy', roles: %w{web app db}, primary: tru
 set :nginx_domains, 'my-new-app.moku.io'
 set :redirect_address_without_www, false  # It strips the 'www.' from the first domain in :nginx_domains and add an auto-redirect from domain.com to www.domain.com (both http and https).
 
-# Puma settings
-set :puma_threads, [0, 4]
-set :puma_workers, 1
+# Puma can serve each request in a thread from an internal thread pool.
+# The `threads` method setting takes two numbers: a minimum and maximum.
+# Any libraries that use thread pools should be configured to match
+# the maximum value specified for Puma. Default is set to 5 threads for minimum
+# and maximum; this matches the default thread size of Active Record.
+set :puma_threads, [5, 5]
+set :puma_workers, 0
 
 # Disable multithreading  # http://omegadelta.net/2013/06/16/puma-on-heroku-with-mri/
 # Remember to enable preload_app! to speed things up. But check glitches with hot-restart.
