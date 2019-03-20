@@ -7,7 +7,7 @@ require File.expand_path(File.dirname(__FILE__) + "/environment")
 if Rails.env.production?
   every 1.day, at: '4:15 am' do
     command "find \"#{File.expand_path('../../shared/db_backups')}/\" -type f -name \"#{Rails.application.credentials.dig(Rails.env.to_sym, :db, :name)}_*sql.gz\" -mtime +90 -exec rm {} \\;"
-    command "sh -c 'PGPASSWORD=\"#{Rails.application.credentials.dig(Rails.env.to_sym, :db, :password)}\" pg_dump -h #{Rails.application.credentials.dig(Rails.env.to_sym, :db, :host)} -U #{Rails.application.credentials.dig(Rails.env.to_sym, :db, :username)} #{Rails.application.credentials.dig(Rails.env.to_sym, :db, :name)} | gzip > \"#{File.expand_path('../../shared/db_backups')}/#{Rails.application.credentials.dig(Rails.env.to_sym, :db, :name)}_`date +%F_%H%M`.sql.gz\"'"
+    command "sh -c 'PGPASSWORD=\"#{Rails.application.credentials.dig(Rails.env.to_sym, :db, :password)}\" pg_dump -h #{Rails.application.credentials.dig(Rails.env.to_sym, :db, :host)} -U #{Rails.application.credentials.dig(Rails.env.to_sym, :db, :username)} #{Rails.application.credentials.dig(Rails.env.to_sym, :db, :name)} | gzip -9 > \"#{File.expand_path('../../shared/db_backups')}/#{Rails.application.credentials.dig(Rails.env.to_sym, :db, :name)}_`date +%F_%H%M`.sql.gz\"'"
   end
 end
 
