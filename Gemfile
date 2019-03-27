@@ -111,5 +111,5 @@ gem 'delayed_job'
 gem 'daemons' # Needed by delayed_job
 
 # Airbrake is best to be loaded after all other gems - https://github.com/airbrake/airbrake/issues/826
-gem 'airbrake', '7.3.0'
-gem 'airbrake-ruby', '2.5.0'
+gem 'airbrake', '8.3.2'
+gem 'airbrake-ruby', '4.2.2'
