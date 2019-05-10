@@ -49,6 +49,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
   gem 'awesome_print', require: 'ap'
+  gem 'brakeman'
 
   # Preview emails in browser
   gem 'letter_opener'
@@ -92,6 +93,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise_token_auth', '~> 1.1'
 gem 'cancancan'
+# gem 'rolify' # Handle roles.
 
 ## Active Admin and pagination
 gem 'activeadmin'
@@ -101,6 +103,7 @@ gem 'kaminari-i18n'
 gem 'rack-cors'
 gem 'versioncake'
 gem 'whenever'
+gem 'lograge'
 # gem 'active_record_query_trace' # Trace who generates SQL queries.
 # gem 'traco'   # Translations
 # gem 'aws-sdk-s3', require: false
