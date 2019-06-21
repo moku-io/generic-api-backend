@@ -101,6 +101,7 @@ gem 'kaminari-i18n'
 
 ## Utility
 gem 'rack-cors'
+gem 'rack-timeout', '~> 0.5'
 gem 'versioncake'
 gem 'whenever'
 gem 'lograge'
