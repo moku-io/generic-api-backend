@@ -39,7 +39,7 @@ resource 'User' do
   end
 
 
-  # get '/api/patients', authorized: true do           # Any controller action that need authentication!
+  # get '/api/patients' do
   #   header 'Host', 'my-new-app.moku.io'
   #   header 'Accept', 'application/vnd.my-new-app.v1+json'
   #   header 'Client-Version', 'Web/1.1'
@@ -50,14 +50,10 @@ resource 'User' do
   #   end
   # end
   #
-  #
-  # get '/api/patients' do                             # Any controller action that need authentication!
+  # get '/api/patients', authorized: true do
   #   header 'Host', 'my-new-app.moku.io'
   #   header 'Accept', 'application/vnd.my-new-app.v1+json'
   #   header 'Client-Version', 'Web/1.1'
-  #
-  #   let(:email) { @user.email }
-  #   let(:token) { 'invalidtoken' }
   #
   #   example 'Ask for a restricted resource using an invalid token' do
   #     header 'access-token', 'invalid'

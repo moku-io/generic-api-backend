@@ -15,10 +15,11 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'my-new-app-staging.moku.io', user: 'deploy', roles: %w{web app db}, my_property: :my_value
+server 'xxxx-backend-staging.moku.io', user: 'deploy', roles: %w{web app db}, my_property: :my_value
 
 # Nginx settings
-set :nginx_domains, 'my-new-app-staging.moku.io'
+set :nginx_domains, 'xxxx-backend-staging.moku.io'
+set :redirect_address_without_www, false  # It strips the 'www.' from the first domain in :nginx_domains and add an auto-redirect from domain.com to www.domain.com (both http and https).
 
 # Puma settings
 set :puma_threads, [0, 4]
@@ -37,7 +38,7 @@ set :puma_workers, 1
 # SSL settings
 set :nginx_use_ssl, true
 
-set :lets_encrypt_domains, 'my-new-app-staging.moku.io www.my-new-app-staging.moku.io'
+set :lets_encrypt_domains, 'xxxx-backend-staging.moku.io www.xxxx-backend-staging.moku.io'
 set :lets_encrypt_email, 'info@moku.io'
 
 set :nginx_ssl_certificate, 'fullchain.pem'

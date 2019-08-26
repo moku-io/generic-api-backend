@@ -30,7 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+    attributes:
+    errors:
+      models:
 
   active_admin:
     dashboard_welcome:
