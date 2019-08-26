@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.9.0'
 
 # Use ActiveStorage variant
 gem 'mini_magick'
+gem 'active_storage_validations'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -68,7 +69,6 @@ group :test do
   # gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
-  gem 'rspec_api_documentation'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'rubocop', require: false
@@ -82,6 +82,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bullet', group: [:test, :development, :staging]
 
 # Docs
+gem 'rspec_api_documentation'
 gem 'apitome'
 
 ## Authentication and Authorization
@@ -97,6 +98,7 @@ gem 'cancancan'
 
 ## Active Admin and pagination
 gem 'activeadmin'
+gem 'arctic_admin'
 gem 'kaminari-i18n'
 
 ## Utility

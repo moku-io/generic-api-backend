@@ -15,10 +15,10 @@
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'staging.my-new-app.moku.io', user: 'deploy', roles: %w{web app db}, my_property: :my_value
+server 'my-new-app-staging.moku.io', user: 'deploy', roles: %w{web app db}, my_property: :my_value
 
 # Nginx settings
-set :nginx_domains, 'staging.my-new-app.moku.io'
+set :nginx_domains, 'my-new-app-staging.moku.io'
 
 # Puma settings
 set :puma_threads, [0, 4]
@@ -37,7 +37,7 @@ set :puma_workers, 1
 # SSL settings
 set :nginx_use_ssl, true
 
-set :lets_encrypt_domains, 'my-new-app.moku.io www.my-new-app.moku.io'
+set :lets_encrypt_domains, 'my-new-app-staging.moku.io www.my-new-app-staging.moku.io'
 set :lets_encrypt_email, 'info@moku.io'
 
 set :nginx_ssl_certificate, 'fullchain.pem'

@@ -7,7 +7,7 @@ set :repo_url, 'git@bitbucket.org:xxxx/xxxx.git'
 
 # Default branch is 'develop'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "develop"
+set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "master"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

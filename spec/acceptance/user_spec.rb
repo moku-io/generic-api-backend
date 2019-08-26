@@ -25,9 +25,11 @@ resource 'User' do
 
     example 'Sign-in' do
       request = do_request(email: @user.email, password: 'examplepassword123')
+      response = JSON.parse(request.first[:response_body])
 
       expect(status).to eq(200)
       expect(request.first[:response_headers]['access-token']).not_to be_blank
+      expect(response['name']).not_to be_blank
     end
 
     example 'Sign-in with wrong password' do
@@ -49,7 +51,7 @@ resource 'User' do
   # end
   #
   #
-  # get '/api/patients', authorized: true do           # Any controller action that need authentication!
+  # get '/api/patients' do                             # Any controller action that need authentication!
   #   header 'Host', 'my-new-app.moku.io'
   #   header 'Accept', 'application/vnd.my-new-app.v1+json'
   #   header 'Client-Version', 'Web/1.1'

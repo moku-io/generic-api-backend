@@ -42,9 +42,8 @@ class User < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::User  # This must be after devise config, never before.
 
-  serialize :tokens # Hotfix: https://github.com/lynndylanhurley/devise_token_auth/issues/10792
-
   # Sarbanes-Oxley Compliance: http://en.wikipedia.org/wiki/Sarbanes%E2%80%93Oxley_Act
+  # TODO: move to https://github.com/devise-security/devise-security
   def password_complexity
     if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W]).+/)
       errors.add :password, "must include at least one of each: lowercase letter, uppercase letter, numeric digit, special character."
