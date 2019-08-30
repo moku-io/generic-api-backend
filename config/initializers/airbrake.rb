@@ -9,11 +9,10 @@ Airbrake.configure do |config|
   config.host        = 'https://errors.moku.io'
 end
 
-# Example of a filtered exception.
-# Airbrake.add_filter do |notice|
-#   # The library supports nested exceptions, so one notice can carry several
-#   # exceptions.
-#   if notice[:errors].any? { |error| error[:type] == 'Net::ReadTimeout' }
-#     notice.ignore!
-#   end
-# end
+Airbrake.add_filter do |notice|
+  # The library supports nested exceptions, so one notice can carry several
+  # exceptions.
+  if notice[:errors].any? { |error| error[:type] == 'Aws::S3::Errors::NotFound' }
+    notice.ignore!
+  end
+end

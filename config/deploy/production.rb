@@ -25,6 +25,10 @@ set :redirect_address_without_www, false  # It strips the 'www.' from the first 
 set :puma_threads, [5, 5]
 set :puma_workers, 0
 
+# Low memory Puma (single worker, without preloading)
+# set :puma_preload_app, false
+# set :puma_workers, nil
+
 # Disable multithreading  # http://omegadelta.net/2013/06/16/puma-on-heroku-with-mri/
 # set :puma_threads, [1, 1]
 # set :puma_workers, 5
