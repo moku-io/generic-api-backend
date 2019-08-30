@@ -15,21 +15,30 @@
 /config/application.yml
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
-/temp
-*.swp
-*~
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+
+/public/assets
 .byebug_history
-.project
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
 .DS_Store
 .idea
 coverage
 db/schema.rb
-/public/javascripts/translations.js
-/public/system/
-/public/assets/
 doc/api/
-storage/
-# Ignore master key for decrypting credentials and more.
-/config/master.key
