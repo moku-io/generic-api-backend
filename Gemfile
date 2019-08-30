@@ -72,6 +72,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'simplecov', require: false
 end
 
@@ -86,12 +87,9 @@ gem 'rspec_api_documentation'
 gem 'apitome'
 
 ## Authentication and Authorization
-# gem 'devise', github: 'plataformatec/devise', ref: '12fc5b76d89cf6e9c47289416fb24bf1a85f03da' # Just before version bump to 4.7 (incompatible with devise_token_auth) https://github.com/lynndylanhurley/devise_token_auth/issues/1331  -  https://github.com/lynndylanhurley/devise_token_auth/issues/1329
-# gem 'devise-i18n'
-# gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth'
-gem 'devise', '~>4.7.0'
+gem 'devise', '~> 4.7.0'
 gem 'devise-i18n'
-gem 'devise_token_auth', github: 'k4roshi/devise_token_auth'#, github: 'lynndylanhurley/devise_token_auth'
+gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth'
 
 gem 'cancancan'
 # gem 'rolify' # Handle roles.
