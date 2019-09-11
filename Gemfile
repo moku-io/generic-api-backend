@@ -103,7 +103,6 @@ gem 'kaminari-i18n'
 gem 'active_storage_validations'
 gem 'rack-cors'
 gem 'rack-timeout', '~> 0.5'
-gem 'versioncake'
 gem 'whenever'
 gem 'lograge'
 # gem 'active_record_query_trace' # Trace who generates SQL queries.

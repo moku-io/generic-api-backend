@@ -1,4 +1,4 @@
-# class API::ServicesController < ApiController
+# class API::ServicesController < APIController
 #   before_action :authenticate_user!
 #   #TODO verifica che il role sia abilitato a questo controller
 #
