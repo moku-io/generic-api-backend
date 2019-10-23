@@ -125,36 +125,36 @@ cap -vT
 ### Logs
 Staging:
 ```sh
-ssh deploy@stagingddress.com
-cd ~/apps/appname_staging/current/log/
+ssh deploy@xxxx-backend-staging.moku.io
+cd ~/apps/xxxx-backend-staging/current/log/
 ```
 
 Production
 ```sh
 ssh deploy@serveraddress.com
-cd ~/apps/appname_production/current/log/
+cd ~/apps/xxxx-backend-production/current/log/
 ```
 
 ### Console
 Staging:
 ```sh
-ssh deploy@stagingddress.com
-cd ~/apps/appname_staging/current
+ssh deploy@xxxx-backend-staging.moku.io
+cd ~/apps/xxxx-backend-staging/current
 RAILS_ENV=staging bundle exec rails c
 ```
 
 Production:
 ```sh
 ssh deploy@serveraddress.com
-cd ~/apps/appname_production/current
+cd ~/apps/xxxx-backend-production/current
 RAILS_ENV=production bundle exec rails c
 ```
 
 
 ### Clear delayed jobs queue
 ```sh
-ssh deploy@stagingddress.com
-cd ~/apps/appname_staging/current
+ssh deploy@xxxx-backend-staging.moku.io
+cd ~/apps/xxxx-backend-staging/current
 RAILS_ENV=staging bundle exec rake jobs:clear
 ```
 

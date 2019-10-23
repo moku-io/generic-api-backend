@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:bitbucket) { |repo| "https://bitbucket.org/#{repo}.git" }
 
-ruby '2.5.5'
+ruby '2.5.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
@@ -35,6 +36,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'faker'
+  gem 'isolator'
+  gem 'attractor'
 end
 
 group :development do
@@ -52,7 +55,7 @@ group :development do
   gem 'letter_opener'
 
   # Use Capistrano for deployment
-  gem 'capistrano', '~> 3.4',        require: false
+  gem 'capistrano', '~> 3.4.0',     require: false
   gem 'capistrano-rvm',             require: false
   gem 'capistrano-rails',           require: false
   gem 'capistrano-bundler',         require: false
@@ -79,9 +82,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Optimizing N+1 queries
-gem 'bullet', group: [:test, :development, :staging]
-
 # Docs
 gem 'rspec_api_documentation'
 gem 'apitome'
@@ -89,10 +89,10 @@ gem 'apitome'
 ## Authentication and Authorization
 gem 'devise', '~> 4.7.0'
 gem 'devise-i18n'
-gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth'
-
+gem 'devise_token_auth', '~> 1.1'
 gem 'cancancan'
 # gem 'rolify' # Handle roles.
+# gem 'koala'  # If you need FB auth.
 
 ## Active Admin and pagination
 gem 'activeadmin'
@@ -101,13 +101,14 @@ gem 'kaminari-i18n'
 
 ## Utility
 gem 'active_storage_validations'
+gem 'bullet', group: [:test, :development, :staging]
 gem 'rack-cors'
 gem 'rack-timeout', '~> 0.5'
 gem 'whenever'
 gem 'lograge'
+gem 'aws-sdk-s3'
 # gem 'active_record_query_trace' # Trace who generates SQL queries.
 # gem 'traco'   # Translations
-# gem 'aws-sdk-s3', require: false
 
 gem 'delayed_job_active_record'
 gem 'delayed_job'

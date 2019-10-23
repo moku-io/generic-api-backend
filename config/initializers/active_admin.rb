@@ -253,6 +253,9 @@ ActiveAdmin.setup do |config|
   #     admin.download_links = proc { can?(:view_download_links) }
   #
   #   end
+  config.namespace :admin do |admin|
+    admin.download_links = false
+  end
 
   # == Pagination
   #

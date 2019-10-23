@@ -1,8 +1,8 @@
 # config valid only for Capistrano 3.1
 lock '3.4.0'
-set :rvm_ruby_version, '2.5.5'
+set :rvm_ruby_version, '2.5.6'
 
-set :application,   "xxxx_#{fetch(:stage)}"
+set :application,   "xxxx-backend-#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxxx/xxxx.git'
 
 # Default branch is 'develop'

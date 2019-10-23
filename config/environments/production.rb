@@ -125,4 +125,5 @@ Rails.application.configure do
 
   ActionMailer::Base.default from: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :action_mailer_from) || Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username)
 
+  config.lograge.enabled = true
 end
