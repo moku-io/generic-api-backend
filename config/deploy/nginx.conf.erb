@@ -45,7 +45,6 @@ limit_req_zone $binary_remote_addr zone=mylimit:3m rate=10r/s;
 <% end %>
 
 server {
-
 <% if fetch(:nginx_use_ssl) %>
     listen 443 ssl http2;
     ssl on;
@@ -93,7 +92,7 @@ client_body_buffer_size 32K;
 sendfile on;
 send_timeout 300s;
 
-<% if fetch(:app_server) && (fetch(:app_server_socket) || fetch(:app_server_port))%>
+<% if fetch(:app_server) && (fetch(:app_server_socket) || fetch(:app_server_port)) %>
     location ^~ /assets/ {
     gzip_static on;
     expires max;
