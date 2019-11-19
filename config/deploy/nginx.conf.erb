@@ -1,106 +1,106 @@
 <% if fetch(:app_server) && (fetch(:app_server_socket) || fetch(:app_server_port))%>
-    # Define App Server Upstream
-    upstream <%= fetch(:application) %>-app-server {
-    <% if fetch(:app_server_socket) %>
-        server unix:<%= fetch(:app_server_socket) %> fail_timeout=0;
-    <% elsif fetch(:app_server_port) %>
-        server <%= fetch(:app_server_host, '127.0.0.1') %>:<%= fetch(:app_server_port) %> fail_timeout=0;
-    <% end %>
-    }
+# Define App Server Upstream
+upstream <%= fetch(:application) %>-app-server {
+<% if fetch(:app_server_socket) %>
+  server unix:<%= fetch(:app_server_socket) %> fail_timeout=0;
+<% elsif fetch(:app_server_port) %>
+  server <%= fetch(:app_server_host, '127.0.0.1') %>:<%= fetch(:app_server_port) %> fail_timeout=0;
+<% end %>
+}
 <% end %>
 
 proxy_cache_path <%= fetch(:deploy_to) %>/shared/nginx_cache levels=1:2 keys_zone=cache-<%= fetch(:application) %>:8m max_size=1000m inactive=600m;
 
-limit_req_zone $binary_remote_addr zone=mylimit:3m rate=10r/s;
+limit_req_zone $binary_remote_addr zone=<%= fetch(:application) %>-limit:3m rate=10r/s;
 
 # HTTP Server
 
 <% if fetch(:nginx_use_ssl) %>
-    server {
-    listen 80;
-    server_name <%= fetch(:nginx_domains) %>;
-    rewrite ^(.*) https://$host$1 permanent;
-    }
+server {
+  listen 80;
+  server_name <%= fetch(:nginx_domains) %>;
+  rewrite ^(.*) https://$host$1 permanent;
+}
 <% end %>
 
 <% if fetch(:redirect_address_without_www) %>
 
-    server {
-    listen 80;
-    server_name <%= fetch(:nginx_domains).split(' ').first.gsub('www.', '') %>;
-    rewrite ^(.*) http://<%= fetch(:nginx_domains).split(' ').first %>$1 permanent;
-    }
+server {
+  listen 80;
+  server_name <%= fetch(:nginx_domains).split(' ').first.gsub('www.', '') %>;
+  rewrite ^(.*) http://<%= fetch(:nginx_domains).split(' ').first %>$1 permanent;
+}
 
-    <% if fetch(:nginx_use_ssl) %>
-        server {
-        listen 443 ssl;
-        ssl_certificate <%= fetch(:nginx_ssl_certificate_path) %>/<%= fetch(:nginx_ssl_certificate) %>;
-        ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>;
+  <% if fetch(:nginx_use_ssl) %>
+server {
+  listen 443 ssl;
+  ssl_certificate <%= fetch(:nginx_ssl_certificate_path) %>/<%= fetch(:nginx_ssl_certificate) %>;
+  ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>;
 
-        server_name <%= fetch(:nginx_domains).split(' ').first.gsub('www.', '') %>;
-        rewrite ^(.*) https://<%= fetch(:nginx_domains).split(' ').first %>$1 permanent;
-        }
-    <% end %>
+  server_name <%= fetch(:nginx_domains).split(' ').first.gsub('www.', '') %>;
+  rewrite ^(.*) https://<%= fetch(:nginx_domains).split(' ').first %>$1 permanent;
+}
+  <% end %>
 <% end %>
 
 server {
 <% if fetch(:nginx_use_ssl) %>
-    listen 443 ssl http2;
-    ssl_certificate <%= fetch(:nginx_ssl_certificate_path) %>/<%= fetch(:nginx_ssl_certificate) %>;
-    ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>;
-    ssl_dhparam <%= fetch(:nginx_dhparam_path) %>/<%= fetch(:nginx_dhparam) %>;   # Create a new one with: openssl dhparam -out dhparams.pem 2048
-    ssl_prefer_server_ciphers on;
-    ssl_protocols TLSv1.2;
-    ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
+  listen 443 ssl http2;
+  ssl_certificate <%= fetch(:nginx_ssl_certificate_path) %>/<%= fetch(:nginx_ssl_certificate) %>;
+  ssl_certificate_key <%= fetch(:nginx_ssl_certificate_key_path) %>/<%= fetch(:nginx_ssl_certificate_key) %>;
+  ssl_dhparam <%= fetch(:nginx_dhparam_path) %>/<%= fetch(:nginx_dhparam) %>;   # Create a new one with: openssl dhparam -out dhparams.pem 2048
+  ssl_prefer_server_ciphers on;
+  ssl_protocols TLSv1.2;
+  ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
 
-    ssl_stapling on;
-    ssl_stapling_verify on;
-    ssl_trusted_certificate <%= fetch(:nginx_ssl_certificate_ca_path) %>/<%= fetch(:nginx_ssl_certificate_ca) %>;
-    resolver 8.8.4.4 8.8.8.8 valid=300s;
-    resolver_timeout 10s;
+  ssl_stapling on;
+  ssl_stapling_verify on;
+  ssl_trusted_certificate <%= fetch(:nginx_ssl_certificate_ca_path) %>/<%= fetch(:nginx_ssl_certificate_ca) %>;
+  resolver 8.8.4.4 8.8.8.8 valid=300s;
+  resolver_timeout 10s;
 
-    ssl_session_cache shared:SSL:32m;
-    ssl_buffer_size 8k;
-    ssl_session_timeout 10m;
+  ssl_session_cache shared:SSL:32m;
+  ssl_buffer_size 8k;
+  ssl_session_timeout 10m;
 <% else %>
-    listen 80;
+  listen 80;
 <% end %>
 
-server_tokens off;
-add_header X-Frame-Options DENY;
-add_header X-Content-Type-Options nosniff;
-add_header X-XSS-Protection "1; mode=block";
+  server_tokens off;
+  add_header X-Frame-Options DENY;
+  add_header X-Content-Type-Options nosniff;
+  add_header X-XSS-Protection "1; mode=block";
 
-server_name <%= fetch(:nginx_domains) %>;
-root        <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>;
+  server_name <%= fetch(:nginx_domains) %>;
+  root        <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>;
 
-access_log <%= fetch(:nginx_log_path) %>/nginx-access.log;
-error_log  <%= fetch(:nginx_log_path) %>/nginx-error.log;
+  access_log <%= fetch(:nginx_log_path) %>/nginx-access.log;
+  error_log  <%= fetch(:nginx_log_path) %>/nginx-error.log;
 
-error_page 404 /404.html;
-location /404.html { root <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>; }
+  error_page 404 /404.html;
+  location /404.html { root <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>; }
 
-error_page 500 /500.html;
-location /500.html { root <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>; }
+  error_page 500 /500.html;
+  location /500.html { root <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>; }
 
-keepalive_timeout 5;
-client_max_body_size 2G;
-client_body_in_file_only clean;
-client_body_buffer_size 32K;
-sendfile on;
-send_timeout 300s;
+  keepalive_timeout 5;
+  client_max_body_size 2G;
+  client_body_in_file_only clean;
+  client_body_buffer_size 32K;
+  sendfile on;
+  send_timeout 300s;
 
 <% if fetch(:app_server) && (fetch(:app_server_socket) || fetch(:app_server_port)) %>
-    location ^~ /assets/ {
+  location ^~ /assets/ {
     gzip_static on;
     expires max;
     add_header Cache-Control public;
-    }
+  }
 
-    try_files $uri/index.html $uri @<%= fetch(:application) %>-app-server;
+  try_files $uri/index.html $uri @<%= fetch(:application) %>-app-server;
 
-    location @<%= fetch(:application) %>-app-server {
-    limit_req zone=mylimit burst=20 nodelay;
+  location @<%= fetch(:application) %>-app-server {
+    limit_req zone=<%= fetch(:application) %>-limit burst=20 nodelay;
 
     proxy_cache cache-<%= fetch(:application) %>;
     proxy_cache_use_stale error updating timeout;
@@ -119,12 +119,12 @@ send_timeout 300s;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     #proxy_set_header Host $http_host;
     proxy_set_header Host $host;
-    <% if fetch(:nginx_use_ssl) %>
+  <% if fetch(:nginx_use_ssl) %>
     proxy_set_header X-Forwarded-Proto https;
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
-    <% else %>
-        proxy_set_header X-Forwarded-Proto http;
-    <% end %>
+  <% else %>
+    proxy_set_header X-Forwarded-Proto http;
+  <% end %>
 
     # Pass caching headers to Rails, otherwise ConditionalGet doesn't work.
     proxy_set_header If-Modified-Since $http_if_modified_since;
@@ -134,6 +134,6 @@ send_timeout 300s;
     # redirects, we set the Host: header above already.
     proxy_redirect off;
     proxy_pass http://<%= fetch(:application) %>-app-server;
-    }
+  }
 <% end %>
 }
