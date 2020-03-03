@@ -37,7 +37,7 @@ set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
 
 # Delayed jobs
 set :delayed_job_workers, 1
-set :delayed_job_queues, []
+# set :delayed_job_queues, []
 set :delayed_job_roles, [:app, :background]
 
 ## Defaults:
