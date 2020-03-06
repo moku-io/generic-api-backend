@@ -60,23 +60,21 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-
   config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :host) || 'localhost', protocol: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :protocol) || 'http' }
 
-  config.action_mailer.smtp_settings = { address:               Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :address),
-                                         port:                  Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :port),
-                                         domain:                Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :domain),
-                                         user_name:             Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username),
-                                         password:              Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :password),
-                                         authentication:        Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :authentication),
-                                         enable_starttls_auto:  Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :starttls),
-                                         openssl_verify_mode:   Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl_verify),
-                                         ssl:                   Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl) }
+  config.action_mailer.smtp_settings = { address: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :address),
+                                         port: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :port),
+                                         domain: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :domain),
+                                         user_name: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username),
+                                         password: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :password),
+                                         authentication: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :authentication),
+                                         enable_starttls_auto: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :starttls),
+                                         openssl_verify_mode: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl_verify),
+                                         ssl: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl) }
 
   ActionMailer::Base.default from: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :action_mailer_from) || Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username)
 
   # config.action_mailer.perform_deliveries = true   ### Uncomment to send email in development.
-
 
   # Bullet for optimizing N+1 queries
   config.after_initialize do

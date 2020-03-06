@@ -2,7 +2,7 @@ require:
   - rubocop-rails
 Rails:
   Enabled: true
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
 Rails/TimeZone:
   Enabled: false
@@ -10,3 +10,8 @@ Rails/HttpPositionalArguments:
   Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
+Style/RescueStandardError:
+  Enabled: false
+Style/RescueModifier:
+  Enabled: false
+

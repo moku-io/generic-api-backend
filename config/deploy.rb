@@ -1,17 +1,16 @@
 # config valid only for Capistrano 3.1
 lock '3.4.0'
-set :rvm_ruby_version, '2.5.6'
+set :rvm_ruby_version, '2.5.7'
 
-set :application,   "xxxx-backend-#{fetch(:stage)}"
+set :application, "xxxx-backend-#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxxx/xxxx.git'
 
 # Default branch is 'develop'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-set :branch, ENV["REVISION"] || ENV["BRANCH_NAME"] || "master"
+set :branch, ENV['REVISION'] || ENV['BRANCH_NAME'] || 'master'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
 
 # Don't change these unless you know what you're doing
 set :user, 'deploy'
@@ -19,7 +18,7 @@ set :pty, true
 set :use_sudo,        false
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
-set :ssh_options,     { forward_agent: true, auth_methods: ["publickey"] }
+set :ssh_options,     { forward_agent: true, auth_methods: ['publickey'] }
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
@@ -38,7 +37,7 @@ set :app_server_socket, "#{shared_path}/tmp/sockets/puma.sock"
 # Delayed jobs
 set :delayed_job_workers, 1
 # set :delayed_job_queues, []
-set :delayed_job_roles, [:app, :background]
+set :delayed_job_roles, %i[app background]
 
 ## Defaults:
 # set :scm,           :git
@@ -48,11 +47,10 @@ set :delayed_job_roles, [:app, :background]
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_files, %w{config/master.key}
-set :linked_dirs,  %w{log tmp/pids tmp/sockets tmp/cache public/assets storage public/.well-known doc/api}
+set :linked_files, %w[config/master.key]
+set :linked_dirs,  %w[log tmp/pids tmp/sockets tmp/cache public/assets storage public/.well-known doc/api]
 
 set :generate_docs, ask('Do you want to generate docs and upload? [Yn]', 'Y')
-
 
 namespace :deploy do
   desc 'Create required directories'
@@ -97,7 +95,7 @@ namespace :deploy do
   desc 'Clear cache'
   task :clear_cache do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "rm -R #{shared_path}/nginx_cache/*" rescue nil  #TODO execute :rm, '-R' funziona?
+      execute "rm -R #{shared_path}/nginx_cache/*" rescue nil # TODO: execute :rm, '-R' funziona?
     end
   end
 
@@ -134,7 +132,7 @@ namespace :deploy do
       # Run letsencrypt to generate the certs
       # Prerequisites:
       #    sudo apt-get install letsencrypt
-      domains_list = fetch(:lets_encrypt_domains).split(' ').collect{|d| "-d #{d}"}.join(' ')
+      domains_list = fetch(:lets_encrypt_domains).split(' ').collect { |d| "-d #{d}" }.join(' ')
       execute "sudo letsencrypt certonly --webroot -w #{current_path}/public/ #{domains_list} --email #{fetch(:lets_encrypt_email)} --agree-tos -n"
 
       # Generate DH parameters for EDH ciphers
@@ -161,7 +159,7 @@ namespace :deploy do
       task :config do
         on roles(:app), in: :sequence, wait: 5 do
           within fetch(:sites_available) do
-            config_file = File.expand_path('../deploy/delayed_job_monit.conf.erb', __FILE__)
+            config_file = File.expand_path('deploy/delayed_job_monit.conf.erb', __dir__)
             config = ERB.new(File.read(config_file)).result(binding)
 
             upload! StringIO.new(config), '/tmp/delayed_job.conf'

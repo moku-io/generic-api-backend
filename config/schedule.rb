@@ -1,5 +1,5 @@
 # Manually load Rails to get env variables and constants
-require File.expand_path(File.dirname(__FILE__) + "/environment")
+require File.expand_path(File.dirname(__FILE__) + '/environment')
 
 # Use this file to easily define all of your cron jobs.
 # Learn more: http://github.com/javan/whenever

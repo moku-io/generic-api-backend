@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 git_source(:bitbucket) { |repo| "https://bitbucket.org/#{repo}.git" }
 
-ruby '2.5.6'
+ruby '2.5.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
@@ -10,7 +10,7 @@ gem 'rails-i18n', '~> 6.0.0'
 # Use pg as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'  #TODO: OLD PUMA
+gem 'puma', '~> 3.11' # TODO: OLD PUMA
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -33,36 +33,36 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails'
+  gem 'attractor'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'faker'
   gem 'isolator'
-  gem 'attractor'
+  gem 'rspec-rails'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
   gem 'awesome_print', require: 'ap'
   gem 'brakeman'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Preview emails in browser
   gem 'letter_opener'
 
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.4.0',     require: false
-  gem 'capistrano-rvm',             require: false
-  gem 'capistrano-rails',           require: false
+  gem 'capistrano-bundle_audit',    require: false
   gem 'capistrano-bundler',         require: false
+  gem 'capistrano-rails',           require: false
+  gem 'capistrano-rvm',             require: false
+  gem 'capistrano3-delayed-job',    require: false
   gem 'capistrano3-nginx', '2.0.2', require: false
   gem 'capistrano3-puma', '1.1.0',  require: false
-  gem 'capistrano3-delayed-job',    require: false
-  gem 'capistrano-bundle_audit',    require: false
   gem 'rb-readline'
 end
 
@@ -72,25 +72,25 @@ group :test do
   # gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   # gem 'webdrivers'
-  gem 'factory_bot_rails'
   gem 'database_cleaner'
+  gem 'factory_bot_rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Docs
-gem 'rspec_api_documentation'
 gem 'apitome'
+gem 'rspec_api_documentation'
 
 ## Authentication and Authorization
+gem 'cancancan'
 gem 'devise', '~> 4.7.0'
 gem 'devise-i18n'
 gem 'devise_token_auth', '~> 1.1'
-gem 'cancancan'
 # gem 'rolify' # Handle roles.
 # gem 'koala'  # If you need FB auth.
 
@@ -101,18 +101,18 @@ gem 'kaminari-i18n'
 
 ## Utility
 gem 'active_storage_validations'
-gem 'bullet', group: [:test, :development, :staging]
+gem 'aws-sdk-s3'
+gem 'bullet', group: %i[test development staging]
+gem 'lograge'
 gem 'rack-cors'
 gem 'rack-timeout', '~> 0.5'
 gem 'whenever'
-gem 'lograge'
-gem 'aws-sdk-s3'
 # gem 'active_record_query_trace' # Trace who generates SQL queries.
 # gem 'traco'   # Translations
 
-gem 'delayed_job_active_record'
-gem 'delayed_job'
 gem 'daemons' # Needed by delayed_job
+gem 'delayed_job'
+gem 'delayed_job_active_record'
 
 # Airbrake is best to be loaded after all other gems - https://github.com/airbrake/airbrake/issues/826
 gem 'airbrake', '8.3.2'

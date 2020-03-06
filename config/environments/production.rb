@@ -51,7 +51,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -80,7 +80,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
@@ -110,18 +110,17 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-
   config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :host) || 'my-new-app.moku.io', protocol: Rails.application.credentials.dig(Rails.env.to_sym, :url, :backend, :protocol) || 'http' }
 
-  config.action_mailer.smtp_settings = { address:               Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :address),
-                                         port:                  Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :port),
-                                         domain:                Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :domain),
-                                         user_name:             Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username),
-                                         password:              Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :password),
-                                         authentication:        Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :authentication),
-                                         enable_starttls_auto:  Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :starttls),
-                                         openssl_verify_mode:   Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl_verify),
-                                         ssl:                   Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl) }
+  config.action_mailer.smtp_settings = { address: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :address),
+                                         port: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :port),
+                                         domain: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :domain),
+                                         user_name: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username),
+                                         password: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :password),
+                                         authentication: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :authentication),
+                                         enable_starttls_auto: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :starttls),
+                                         openssl_verify_mode: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl_verify),
+                                         ssl: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :ssl) }
 
   ActionMailer::Base.default from: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :action_mailer_from) || Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username)
 

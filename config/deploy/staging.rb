@@ -8,18 +8,17 @@
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
 
-
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'xxxx-backend-staging.moku.io', user: 'deploy', roles: %w{web app db}, my_property: :my_value
+server 'xxxx-backend-staging.moku.io', user: 'deploy', roles: %w[web app db], my_property: :my_value
 
 # Nginx settings
 set :nginx_domains, 'xxxx-backend-staging.moku.io'
-set :redirect_address_without_www, false  # It strips the 'www.' from the first domain in :nginx_domains and add an auto-redirect from domain.com to www.domain.com (both http and https).
+set :redirect_address_without_www, false # It strips the 'www.' from the first domain in :nginx_domains and add an auto-redirect from domain.com to www.domain.com (both http and https).
 
 # Puma settings
 set :puma_preload_app, false
@@ -35,7 +34,6 @@ set :puma_workers, 1
 # - Threads to be determined in connection with RAM availability and application and
 # - Threads = Connection Pool (database)
 
-
 # SSL settings
 set :nginx_use_ssl, true
 
@@ -46,11 +44,10 @@ set :nginx_ssl_certificate, 'fullchain.pem'
 set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
 set :nginx_ssl_certificate_key, 'privkey.pem'
 set :nginx_ssl_certificate_key_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
-set :nginx_ssl_certificate_ca, 'chain.pem'  # As nginx_ssl_certificate bundle, but without the first one (this domain); https://www.digitalocean.com/community/tutorials/how-to-configure-ocsp-stapling-on-apache-and-nginx
+set :nginx_ssl_certificate_ca, 'chain.pem' # As nginx_ssl_certificate bundle, but without the first one (this domain); https://www.digitalocean.com/community/tutorials/how-to-configure-ocsp-stapling-on-apache-and-nginx
 set :nginx_ssl_certificate_ca_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
 set :nginx_dhparam, 'dhparams.pem'
 set :nginx_dhparam_path, "#{shared_path}/ssl"
-
 
 # Custom SSH Options
 # ==================

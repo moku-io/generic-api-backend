@@ -20,28 +20,28 @@ module GenericBackend
 
     config.active_job.queue_adapter = :delayed_job
 
-    config.i18n.available_locales = [:it, :en]
+    config.i18n.available_locales = %i[it en]
 
     config.middleware.insert_before Warden::Manager, Rack::Cors do
       allow do
-        origins /http:\/\/localhost(:\d+)?/,
-                /http:\/\/127\.0\.0\.1(:\d+)?/,
-                /http:\/\/10\.1\.60\.*(:\d+)?/,
-                /http(s)*:\/\/.*\.moku\.io/,
-                /http(s)*:\/\/.*\..*\.moku\.io/,
-                /http(s)*:\/\/.*\.ngrok\.io/,
-                /http(s)*:\/\/.*\.my-new-app\.production_server\.com/   # Accept subdomains and both http and https
+        origins %r{http://localhost(:\d+)?},
+                %r{http://127\.0\.0\.1(:\d+)?},
+                %r{http://10\.1\.60\.*(:\d+)?},
+                %r{http(s)*://.*\.moku\.io},
+                %r{http(s)*://.*\..*\.moku\.io},
+                %r{http(s)*://.*\.ngrok\.io},
+                %r{http(s)*://.*\.my-new-app\.production_server\.com} # Accept subdomains and both http and https
 
         resource '*',
-                 methods: [:get, :post, :put, :patch, :delete, :options],
-                 headers: :any, #['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Accept-Encoding', 'Authorization', 'Content-Disposition', 'Client-Version', 'Accept-Language'], # ALL headers must be specified
-                 expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+                 methods: %i[get post put patch delete options],
+                 headers: :any, # ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Accept-Encoding', 'Authorization', 'Content-Disposition', 'Client-Version', 'Accept-Language'], # ALL headers must be specified
+                 expose: %w[access-token expiry token-type uid client],
                  max_age: 600
       end
     end
 
     config.after_initialize do
-      Apitome.configuration.mount_at = '/docs'  # http://stackoverflow.com/a/34921974/930720
+      Apitome.configuration.mount_at = '/docs' # http://stackoverflow.com/a/34921974/930720
     end
   end
 end

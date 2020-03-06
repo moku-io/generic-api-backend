@@ -38,12 +38,12 @@
 
 FactoryBot.define do
   factory :user do
-    sequence(:uid) {|n| "user_#{n}@test.com"}
-    sequence(:email) {|n| "user_#{n}@test.com"}
+    sequence(:uid) { |n| "user_#{n}@test.com" }
+    sequence(:email) { |n| "user_#{n}@test.com" }
     sequence(:name) { |n| "Name #{n}" }
     provider { 'email' }
-    password { "examplepassword123" }
-    password_confirmation { "examplepassword123" }
+    password { 'examplepassword123' }
+    password_confirmation { 'examplepassword123' }
     confirmed_at { 1.hour.ago }
   end
 end

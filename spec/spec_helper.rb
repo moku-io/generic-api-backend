@@ -5,8 +5,8 @@ SimpleCov.start 'rails' do
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 include ActionDispatch::TestProcess
 
@@ -17,7 +17,7 @@ include ActionDispatch::TestProcess
 # run twice. It is recommended that you do not name files matching this glob to
 # end with _spec.rb. You can configure this pattern with with the --pattern
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -80,13 +80,12 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-
   config.before(:all) do
-      FileUtils.mkdir_p "#{Rails.root}/tmp/test_uploads"
+    FileUtils.mkdir_p "#{Rails.root}/tmp/test_uploads"
   end
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation#, {:except => %w()}
+    DatabaseCleaner.strategy = :truncation # , {:except => %w()}
     DatabaseCleaner.clean_with(:truncation)
   end
 
@@ -110,16 +109,14 @@ RSpec.configure do |config|
   end
 end
 
-
 RspecApiDocumentation.configure do |config|
   config.format = :json
   config.api_name = 'GenericBackend API'
   config.curl_host = 'http://my-new-app.moku.io'
-  config.curl_headers_to_filter = ['Host', 'Cookie']
+  config.curl_headers_to_filter = %w[Host Cookie]
   config.docs_dir = Rails.root.join('doc', 'api')
   config.keep_source_order = true
 end
-
 
 def stub_auth
   @new_token = @user.create_new_auth_token

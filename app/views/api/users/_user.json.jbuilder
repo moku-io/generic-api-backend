@@ -1,4 +1,3 @@
-
 json.extract! user, :id, :uid, :provider, :email, :name
 
 # if user.patient?
