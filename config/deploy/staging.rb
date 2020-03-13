@@ -38,7 +38,7 @@ set :puma_workers, 1
 set :nginx_use_ssl, true
 
 set :lets_encrypt_domains, 'xxxx-backend-staging.moku.io www.xxxx-backend-staging.moku.io'
-set :lets_encrypt_email, 'info@moku.io'
+set :lets_encrypt_email, 'admin@moku.io'
 
 set :nginx_ssl_certificate, 'fullchain.pem'
 set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/#{fetch(:lets_encrypt_domains).split(' ').first}"
