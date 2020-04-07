@@ -18,12 +18,14 @@ limit_req_zone $binary_remote_addr zone=<%= fetch(:application) %>-limit:3m rate
 <% if fetch(:nginx_use_ssl) %>
 server {
   listen 80;
+  <% if fetch(:nginx_domains) %>
   server_name <%= fetch(:nginx_domains) %>;
+  <% end %>
   rewrite ^(.*) https://$host$1 permanent;
 }
 <% end %>
 
-<% if fetch(:redirect_address_without_www) %>
+<% if fetch(:redirect_address_without_www) && fetch(:nginx_domains) %>
 
 server {
   listen 80;
@@ -71,7 +73,9 @@ server {
   add_header X-Content-Type-Options nosniff;
   add_header X-XSS-Protection "1; mode=block";
 
+<% if fetch(:nginx_domains) %>
   server_name <%= fetch(:nginx_domains) %>;
+<% end %>
   root        <%= fetch(:deploy_to) %>/current/<%= fetch(:nginx_static_dir) %>;
 
   access_log <%= fetch(:nginx_log_path) %>/nginx-access.log;
@@ -119,12 +123,7 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     #proxy_set_header Host $http_host;
     proxy_set_header Host $host;
-  <% if fetch(:nginx_use_ssl) %>
-    proxy_set_header X-Forwarded-Proto https;
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
-  <% else %>
-    proxy_set_header X-Forwarded-Proto http;
-  <% end %>
+    #proxy_set_header X-Forwarded-Proto $scheme;
 
     # Pass caching headers to Rails, otherwise ConditionalGet doesn't work.
     proxy_set_header If-Modified-Since $http_if_modified_since;

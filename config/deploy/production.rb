@@ -22,7 +22,8 @@ set :redirect_address_without_www, false # It strips the 'www.' from the first d
 
 # Puma settings
 set :puma_threads, [5, 5]
-set :puma_workers, 0
+set :puma_workers, 0 # 0 is single process mode, otherwise it's clustered-mode.
+set :puma_preload_app, false # Enable preload only if using multiple workers. Otherwise it is just a waste of memory.
 
 # Low memory Puma (single worker, without preloading)
 # set :puma_preload_app, false

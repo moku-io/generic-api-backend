@@ -39,6 +39,9 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # Limit log size for development (10MB maximum).
+  config.logger = ActiveSupport::Logger.new(config.paths['log'].first, 1, 10 * 1024 * 1024)
+
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 

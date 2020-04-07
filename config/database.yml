@@ -5,6 +5,7 @@ development: &default
   username: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :username) || 'postgres' %>
   password: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :password) || 'postgres' %>
   database: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :name) || 'xxxx-development' %>
+  sslmode: <%= Rails.application.credentials.dig(Rails.env.to_sym, :db, :sslmode) || 'prefer' %>
   pool: 5
   timeout: 5000
 

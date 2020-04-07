@@ -24,9 +24,9 @@ set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log,  "#{release_path}/log/puma.access.log"
-set :puma_preload_app, true         # Lower memory footprint. For 0 seconds deploy set it to false and invoke puma:phased-restart on deploy:restart
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to true if using ActiveRecord
+set :puma_restart_command, 'bundle exec --keep-file-descriptors puma'
 set :nginx_root_path, '/etc/nginx'
 set :nginx_sites_available, 'sites-available'
 set :nginx_sites_enabled, 'sites-enabled'

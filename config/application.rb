@@ -28,9 +28,10 @@ module GenericBackend
                 %r{http://127\.0\.0\.1(:\d+)?},
                 %r{http://10\.1\.60\.*(:\d+)?},
                 %r{http(s)*://.*\.moku\.io},
-                %r{http(s)*://.*\..*\.moku\.io},
+                %r{http(s)*://.*\.netlify\.com},
                 %r{http(s)*://.*\.ngrok\.io},
-                %r{http(s)*://.*\.my-new-app\.production_server\.com} # Accept subdomains and both http and https
+                %r{chrome-extension://.*}, # Allow Altair opened in the browser.
+                %r{http(s)*://my-new-app\.production_server\.com} #TODO
 
         resource '*',
                  methods: %i[get post put patch delete options],
