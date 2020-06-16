@@ -19,5 +19,8 @@ it:
           attributes:
 
   active_admin:
+    devise:
+      login:
+        title: ''
     dashboard_welcome:
       welcome: Benvenuto nella piattaforma xxxx.

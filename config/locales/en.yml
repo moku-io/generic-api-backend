@@ -37,5 +37,8 @@ en:
       models:
 
   active_admin:
+    devise:
+      login:
+        title: ''
     dashboard_welcome:
       welcome: Welcome to xxxx.
