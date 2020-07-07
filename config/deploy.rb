@@ -6,7 +6,6 @@ set :application, "xxxx-backend-#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxxx/xxxx.git'
 
 # Default branch is 'master'
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 set :branch, ENV['REVISION'] || ENV['BRANCH_NAME'] || 'master'
 
 # Default value for default_env is {}
