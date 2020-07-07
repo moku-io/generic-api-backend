@@ -131,7 +131,7 @@ cd ~/apps/xxxx-backend-staging/current/log/
 
 Production
 ```sh
-ssh deploy@serveraddress.com
+ssh deploy@xxxx-backend.moku.io
 cd ~/apps/xxxx-backend-production/current/log/
 ```
 
@@ -145,7 +145,7 @@ RAILS_ENV=staging bundle exec rails c
 
 Production:
 ```sh
-ssh deploy@serveraddress.com
+ssh deploy@xxxx-backend.moku.io
 cd ~/apps/xxxx-backend-production/current
 RAILS_ENV=production bundle exec rails c
 ```
