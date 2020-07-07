@@ -5,7 +5,7 @@ set :rvm_ruby_version, '2.6.5'
 set :application, "xxxx-backend-#{fetch(:stage)}"
 set :repo_url, 'git@bitbucket.org:xxxx/xxxx.git'
 
-# Default branch is 'develop'
+# Default branch is 'master'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 set :branch, ENV['REVISION'] || ENV['BRANCH_NAME'] || 'master'
 
