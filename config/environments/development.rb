@@ -77,7 +77,7 @@ Rails.application.configure do
 
   ActionMailer::Base.default from: Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :action_mailer_from) || Rails.application.credentials.dig(Rails.env.to_sym, :smtp, :username)
 
-  # config.action_mailer.perform_deliveries = true   ### Uncomment to send email in development.
+  config.action_mailer.perform_deliveries = false
 
   # Bullet for optimizing N+1 queries
   config.after_initialize do
