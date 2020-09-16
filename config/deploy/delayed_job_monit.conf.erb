@@ -1,4 +1,6 @@
-check process delayed_job_<%= fetch(:application) %>
-with pidfile "<%= fetch(:deploy_to) %>/shared/tmp/pids/delayed_job.pid"
-start program = "/bin/su deploy -c 'cd <%= fetch(:deploy_to) %>/current && RAILS_ENV=<%= fetch(:stage) %> ~/.rvm/bin/rvm <%= RUBY_VERSION %> do bundle exec bin/delayed_job <%= "-n #{fetch(:delayed_job_workers)}" unless fetch(:delayed_job_workers).nil? %> <%= "--queues=#{fetch(:delayed_job_queues).join(',')}" unless fetch(:delayed_job_queues).nil? %> start'"
-stop program = "/bin/su deploy -c 'cd <%= fetch(:deploy_to) %>/current && RAILS_ENV=<%= fetch(:stage) %> ~/.rvm/bin/rvm <%= RUBY_VERSION %> do bundle exec bin/delayed_job stop'"
+<% fetch(:delayed_job_workers, 1).times do |identifier| %>
+check process delayed_job_<%= fetch(:application) %>_<%= identifier %>
+with pidfile "<%= fetch(:deploy_to) %>/shared/tmp/pids/delayed_job.<%= identifier %>.pid"
+start program = "/bin/su deploy -c 'cd <%= fetch(:deploy_to) %>/current && RAILS_ENV=<%= fetch(:stage) %> ~/.rvm/bin/rvm <%= RUBY_VERSION %> do bundle exec bin/delayed_job -i <%= identifier %> <%= "--queues=#{fetch(:delayed_job_queues).join(',')}" unless fetch(:delayed_job_queues).nil? %> start'"
+stop program = "/bin/su deploy -c 'cd <%= fetch(:deploy_to) %>/current && RAILS_ENV=<%= fetch(:stage) %> ~/.rvm/bin/rvm <%= RUBY_VERSION %> do bundle exec bin/delayed_job -i <%= identifier %> stop'"
+<% end %>
