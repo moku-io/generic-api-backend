@@ -25,10 +25,6 @@ set :puma_threads, [5, 5]
 set :puma_workers, 0 # 0 is single process mode, otherwise it's clustered-mode.
 set :puma_preload_app, false # Enable preload only if using multiple workers. Otherwise it is just a waste of memory.
 
-# Low memory Puma (single worker, without preloading)
-# set :puma_preload_app, false
-# set :puma_workers, nil
-
 # Disable multithreading  # http://omegadelta.net/2013/06/16/puma-on-heroku-with-mri/
 # set :puma_threads, [1, 1]
 # set :puma_workers, 5
