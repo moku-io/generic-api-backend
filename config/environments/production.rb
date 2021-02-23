@@ -49,7 +49,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
@@ -85,6 +85,27 @@ Rails.application.configure do
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  end
+
+  # Lograge
+  config.lograge.enabled = true
+  config.lograge.base_controller_class = ['APIController', 'ApplicationController']
+
+  # Generate log in JSON
+  config.lograge.formatter = Lograge::Formatters::Json.new
+  config.lograge.custom_options = lambda do |event|
+    {
+        params: event.payload[:params],
+        exception: event.payload[:exception]
+    }
+  end
+  config.lograge.custom_payload do |controller|
+    {
+        # host: controller.request.host,
+        ip: controller.request.env['HTTP_X_REAL_IP'],
+        current_user_id: (controller.current_user.try(:id) rescue nil),
+        current_admin_user_id: (controller.current_admin_user.try(:id) rescue nil)
+    }
   end
 
   # Do not dump schema after migrations.

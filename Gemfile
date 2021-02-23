@@ -103,7 +103,7 @@ gem 'kaminari-i18n'
 gem 'active_storage_validations'
 gem 'aws-sdk-s3'
 gem 'bullet', group: %i[test development staging]
-gem 'lograge'
+gem 'lograge', group: :production
 gem 'rack-cors'
 gem 'rack-timeout', '~> 0.5'
 gem 'whenever'
